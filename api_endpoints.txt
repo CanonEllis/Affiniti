@@ -1,0 +1,16 @@
+1.) '/users'
+-GET [Login]
+*username
+*password
+
+-POST [Create Acc.]
+*username
+*password
+*first_name
+*last_name
+*email
+
+-PUT [Update Acc. info]
+//later
+
+2.) '/users/logout' [Whenever user wants to log out]
