@@ -1,7 +1,7 @@
 import angular from 'angular';
 
 angular.module('app', [require("angular-ui-router")])
-.config(function(($stateProvider, $urlRouterProvider))
+.config(function($stateProvider, $urlRouterProvider)
 
 {
 	$urlRouterProvider.otherwise("/state1");
