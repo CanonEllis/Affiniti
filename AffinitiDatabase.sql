@@ -58,5 +58,7 @@ CREATE TABLE users (
     email varchar(50)  NOT NULL,
     password varchar(255)  NOT NULL,
     dateCreated date  NOT NULL,
+    verified bool NOT NULL,
+    activationKey varchar(255) NOT NULL,
     CONSTRAINT users_pk PRIMARY KEY (username)
 );
