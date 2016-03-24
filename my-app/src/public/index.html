@@ -1,0 +1,29 @@
+<!doctype html>
+<html ng-app="app" lang="en" ng-controller="AppCtrl">
+<head>
+  <meta charset="UTF-8">
+  <title>App</title>
+  <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+      <base href="/">
+    <style>
+      body{
+       background-color:;
+            }
+    </style>
+</head>
+<body>
+ <nav class="navbar navbar-inverse navi">
+   <a class="navbar-brand" >Affinity</a>
+   <ul class="nav navbar-nav">
+   <li ng-click="Home()"><a>Home</a></li>
+   <li ng-click="Login()"><a>Login</a></li>
+   <li ng-click="Instructions()" ><a>Instructions</a></li>
+   </ul>
+ </nav>
+ <div ui-view></div>
+</body>
+</html>
