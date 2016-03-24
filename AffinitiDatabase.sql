@@ -1,63 +1,62 @@
 -- tables
--- Table Access
-CREATE TABLE Access (
-    Username varchar(25)  NOT NULL,
-    DiagramID int  NOT NULL,
-    AccessLevel varchar(25)  NOT NULL,
-    CONSTRAINT Access_pk PRIMARY KEY (Username,DiagramID)
+-- Table access
+CREATE TABLE access (
+    username varchar(25)  NOT NULL,
+    diagramID int  NOT NULL,
+    accessLevel varchar(25)  NOT NULL,
+    CONSTRAINT access_pk PRIMARY KEY (username,diagramID)
 );
 
--- Table Arrows
-CREATE TABLE Arrows (
-    ArrowID int  NOT NULL auto_increment,
-    NoteID1 int  NOT NULL,
-    NoteID2 int  NOT NULL,
-    DiagramID int  NOT NULL,
-    Thickness int  NOT NULL,
-    Color varchar(25)  NOT NULL,
-    CONSTRAINT Arrows_pk PRIMARY KEY (ArrowID)
+-- Table arrows
+CREATE TABLE arrows (
+    arrowID int  NOT NULL auto_increment,
+    noteID1 int  NOT NULL,
+    noteID2 int  NOT NULL,
+    diagramID int  NOT NULL,
+    thickness int  NOT NULL,
+    color varchar(25)  NOT NULL,
+    CONSTRAINT arrows_pk PRIMARY KEY (arrowID)
 );
 
--- Table Diagram
-CREATE TABLE Diagram (
-    DiagramID int  NOT NULL auto_increment,
-    Username varchar(25)  NOT NULL,
-    Name varchar(50)  NOT NULL,
-    DateCreated date  NOT NULL,
-    PrivacyLevel bool  NOT NULL,
-    CONSTRAINT Diagram_pk PRIMARY KEY (DiagramID)
+-- Table diagram
+CREATE TABLE diagram (
+    diagramID int  NOT NULL auto_increment,
+    username varchar(25)  NOT NULL,
+    name varchar(50)  NOT NULL,
+    dateCreated date  NOT NULL,
+    privacyLevel bool  NOT NULL,
+    CONSTRAINT diagram_pk PRIMARY KEY (diagramID)
 );
 
--- Table Friends
-CREATE TABLE Friends (
-    Username varchar(25)  NOT NULL,
-    FriendsWith varchar(25)  NOT NULL,
-    FriendshipBegan date  NOT NULL,
-    CONSTRAINT Friends_pk PRIMARY KEY (Username,FriendsWith)
+-- Table friends
+CREATE TABLE friends (
+    username varchar(25)  NOT NULL,
+    friendsWith varchar(25)  NOT NULL,
+    friendshipBegan date  NOT NULL,
+    CONSTRAINT friends_pk PRIMARY KEY (username,friendsWith)
 );
 
--- Table Note
-CREATE TABLE Note (
-    NoteID int  NOT NULL auto_increment,
-    Shape varchar(25)  NOT NULL,
-    XPos int  NOT NULL,
-    YPos int  NOT NULL,
-    Height int  NOT NULL,
-    Width int  NOT NULL,
-    Font varchar(200)  NOT NULL,
-    Content varchar(1000)  NOT NULL,
-    DiagramID int  NOT NULL,
-    CONSTRAINT Note_pk PRIMARY KEY (NoteID)
+-- Table note
+CREATE TABLE note (
+    noteID int  NOT NULL auto_increment,
+    shape varchar(25)  NOT NULL,
+    xPos int  NOT NULL,
+    yPos int  NOT NULL,
+    height int  NOT NULL,
+    width int  NOT NULL,
+    font varchar(200)  NOT NULL,
+    content varchar(1000)  NOT NULL,
+    diagramID int  NOT NULL,
+    CONSTRAINT note_pk PRIMARY KEY (noteID)
 );
 
--- Table Users
-CREATE TABLE Users (
-    Username varchar(25)  NOT NULL,
-    FirstName varchar(25)  NOT NULL,
-    LastName varchar(25)  NOT NULL,
-    Email varchar(50)  NOT NULL,
-    Password varchar(255)  NOT NULL,
-    Salt varchar(255)  NOT NULL,
-    DateCreated date  NOT NULL,
-    CONSTRAINT Users_pk PRIMARY KEY (Username)
+-- Table users
+CREATE TABLE users (
+    username varchar(25)  NOT NULL,
+    firstname varchar(25)  NOT NULL,
+    lastname varchar(25)  NOT NULL,
+    email varchar(50)  NOT NULL,
+    password varchar(255)  NOT NULL,
+    dateCreated date  NOT NULL,
+    CONSTRAINT users_pk PRIMARY KEY (username)
 );
