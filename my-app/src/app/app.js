@@ -6,44 +6,44 @@ var myapp=angular.module('app', [require("angular-ui-router")])
 	$urlRouterProvider.otherwise("/home");
 	$stateProvider
 	.state(
-	  'login',
+	  'userProfile',
 	    {
 		  url:"/login",
-			templateUrl:"templates/login.html",
-		    controller:"LoginCtrl"
+			templateUrl:"templates/userProfile.html",
+		    controller:"userCtrl"
 		}
 	
 	)
 	.state(
-	  'instruction',
+	  'about',
 	   {
 		 url:"/instruction",
-		 templateUrl:"templates/instruction.html",
-		 controller:"SignupCtrl"
+		 templateUrl:"templates/aboutUS.html",
+		 controller:"aboutCtrl"
 		}
 	)
 	.state(
-		'home',
+		'landing',
 		{
 			url:"^/home",
-			templateUrl:"templates/home.html",
-			controller:"HomeCtrl"
+			templateUrl:"templates/landingpage.html",
+			controller:"LandingCtrl"
 		}
 	)
 });
 myapp.controller('AppCtrl',function($scope,$state){
 	
-	$scope.Instructions=function()
+	$scope.about=function()
 	{
-		$state.go("instruction");
+		$state.go("about");
 	}
-	$scope.Home=function()
+	$scope.landing=function()
 	{
-		$state.go("home");
+		$state.go("landing");
 	}
-	$scope.Login=function()
+	$scope.userProfile=function()
 	{
-		$state.go("login");
+		$state.go("userProfile");
 	}
 })
 .controller('HomeCtrl',function($state,$scope,$http){
@@ -63,7 +63,7 @@ myapp.controller('AppCtrl',function($scope,$state){
 						//	$scope.firstname = response.firstName;
 							// $scope.lastname = response.LastName;
 							
-							  $scope.res="Good";
+							 // $scope.res="Good";
 								});
 	}
 	});
