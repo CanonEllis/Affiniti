@@ -3,12 +3,12 @@ var myapp=angular.module('app', [require("angular-ui-router")])
 .config(function($stateProvider, $urlRouterProvider)
 
 {
-	$urlRouterProvider.otherwise("/home");
+	$urlRouterProvider.otherwise("/landing");
 	$stateProvider
 	.state(
 	  'userProfile',
 	    {
-		  url:"/login",
+		  url:"/userProfile",
 			templateUrl:"templates/userProfile.html",
 		    controller:"userCtrl"
 		}
@@ -17,7 +17,7 @@ var myapp=angular.module('app', [require("angular-ui-router")])
 	.state(
 	  'about',
 	   {
-		 url:"/instruction",
+		 url:"/about",
 		 templateUrl:"templates/aboutUS.html",
 		 controller:"aboutCtrl"
 		}
@@ -25,7 +25,7 @@ var myapp=angular.module('app', [require("angular-ui-router")])
 	.state(
 		'landing',
 		{
-			url:"^/home",
+			url:"^/landing",
 			templateUrl:"templates/landingpage.html",
 			controller:"LandingCtrl"
 		}
