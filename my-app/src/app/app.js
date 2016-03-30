@@ -46,3 +46,24 @@ myapp.controller('AppCtrl',function($scope,$state){
 		$state.go("login");
 	}
 })
+.controller('HomeCtrl',function($state,$scope,$http){
+	
+	$scope.firstname = "Stranger";
+	$scope.lastname ="!";
+	$scope.Userpage = function()
+	{
+	$http({
+				method: 'GET',
+				url: 'http://private-6ef9df-affiniti.apiary-mock.com/login',
+				params:{
+				// name: $scope.name,
+				 				
+				}
+				}).then(function successCallback(response){
+						//	$scope.firstname = response.firstName;
+							// $scope.lastname = response.LastName;
+							
+							  $scope.res="Good";
+								});
+	}
+	});
