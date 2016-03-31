@@ -14,7 +14,7 @@
 				<!-- SIDEBAR USER TITLE -->
 				<div class="profile-usertitle">
 					<div class="profile-usertitle-name">
-						Blaise Graham
+						{{name}}
 					</div>
 					<div class="profile-usertitle-job">
 						Dancer
@@ -29,13 +29,13 @@
 				<!-- SIDEBAR MENU -->
 				<div class="profile-usermenu">
 					<ul class="nav">
-						<li class="active">
-							<a href="#">
+						<li class="active" n>
+							<a>
 							<i class="glyphicon glyphicon-home"></i>
 							Overview </a>
 						</li>
-						<li>
-							<a href="#">
+						<li ng-click="Userpage()">
+							<a>
 							<i class="glyphicon glyphicon-user"></i>
               <!-- Account Settings will allow the user to change email and password -->
 							Account Settings </a>
@@ -47,7 +47,7 @@
 		</div>
 		<div class="col-md-9">
             <div class="profile-content">
-			           This is a bio about me the user!
+			           My Email is {{email}}
             </div>
 		</div>
 	</div>

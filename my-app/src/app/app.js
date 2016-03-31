@@ -3,7 +3,7 @@ var myapp=angular.module('app', [require("angular-ui-router")])
 .config(function($stateProvider, $urlRouterProvider)
 
 {
-	$urlRouterProvider.otherwise("/landing");
+	$urlRouterProvider.otherwise("/login");
 	$stateProvider
 	.state(
 	  'userProfile',
@@ -30,8 +30,19 @@ var myapp=angular.module('app', [require("angular-ui-router")])
 			controller:"LandingCtrl"
 		}
 	)
+	.state(
+		'login',
+		{
+			url:"^/login",
+			templateUrl:"templates/login.html",
+			controller:"LoginCtrl"
+		}
+	)
 });
-myapp.controller('AppCtrl',function($scope,$state){
+myapp.factory('User',function(){
+	return {data:{}};
+})
+.controller('AppCtrl',function($scope,$state){
 	
 	$scope.about=function()
 	{
@@ -45,25 +56,49 @@ myapp.controller('AppCtrl',function($scope,$state){
 	{
 		$state.go("userProfile");
 	}
-})
-.controller('HomeCtrl',function($state,$scope,$http){
-	
-	$scope.firstname = "Stranger";
-	$scope.lastname ="!";
-	$scope.Userpage = function()
+	$scope.login=function()
 	{
-	$http({
+		$state.go("login")
+	}
+})
+.controller('LoginCtrl',function($state,$scope,$http,User){
+	$scope.name = "jsmith";
+    $scope.email= "someone@smu.edu"
+	$scope.log = function()
+	{
+		
+			$http({
 				method: 'GET',
-				url: 'http://private-6ef9df-affiniti.apiary-mock.com/login',
+				url: 'http://private-d095eb-affiniti.apiary-mock.com/users/jsmith',
 				params:{
-				// name: $scope.name,
-				 				
 				}
 				}).then(function successCallback(response){
 						//	$scope.firstname = response.firstName;
 							// $scope.lastname = response.LastName;
 							
-							 // $scope.res="Good";
+							User.data = response.data;
+							
+							if(User.data["password"]==$scope.password)
+							 {$state.go("userProfile");}
+							else {alert(User.data["password"])}
+							
+							 // $scope.res="Good"
+								}, function errorCallback(response){
+							
+								
 								});
 	}
+	})
+	.controller('userCtrl',function($state,$scope,$http,User){
+		
+		$scope.name = "jsmith";
+		$scope.email="some@smu.edu"
+		if(User.data!= null)
+		{
+			$scope.name = User.data["username"];
+			$scope.email = User.data["email"];
+		}
+		
+		
+		
 	});
