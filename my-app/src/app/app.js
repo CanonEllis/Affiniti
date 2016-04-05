@@ -62,7 +62,7 @@ myapp.factory('User',function(){
 	}
 })
 .controller('LoginCtrl',function($state,$scope,$http,User){
-	$scope.name = "jsmith";
+	/*$scope.name = "jsmith";
     $scope.email= "someone@smu.edu"
 	$scope.log = function()
 	{
@@ -87,7 +87,7 @@ myapp.factory('User',function(){
 							
 								
 								});
-	}
+	}*/
 	})
 	.controller('userCtrl',function($state,$scope,$http,User){
 		
