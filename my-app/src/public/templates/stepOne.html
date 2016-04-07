@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Project Name</title>
+    <style>
+    body{
+      background-color: #3498db;
+    }
+    .card{
+      width: 40%;
+      margin-left: 30%;
+      margin-top:10%;
+      height:auto;
+      padding: 20px;
+      box-shadow: 0px 0px 10px 0px;
+      background-color:#9ECAF0;
+      box-sizing: border-box;
+            }
+    .list-group{
+      margin-top:3rem;
+      margin-bottom: 3rem;
+       
+          }
+   .cha
+  {
+    float:right;
+  }
+  
+    </style>
+    </head>
+    <body>
+       <div class="card">
+        <div class="card-block">
+          <div class="input-group">
+           <input type="text" class="form-control" placeholder="Add your Bulletpoints" ng-model="bullet">
+             <span class="input-group-btn">
+              <button class="btn btn-primary" type="button" ng-click="add()">Add!</button>
+             </span>
+            </div>
+            <ul class="list-group">
+              <li class="list-group-item" ng-repeat = "b in bulletpoints">{{b}}<span class="cha" ng-click="delete(b)"><i class="fa fa-times"></i></span></li>
+         </ul>         
+                
+          <a ng-click="gosteptwo()" class="btn btn-primary">Next Step</a>
+      </div>
+   </body>
+</html>

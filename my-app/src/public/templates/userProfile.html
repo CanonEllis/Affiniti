@@ -1,6 +1,114 @@
 <head>
-<link rel="stylesheet" type="text/css" href="userProfile-style.css">
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  	<!-- Author Canon Ellis-->
+<style>
+	body {
+		background: #F1F3FA;
+	}
+
+	/* Profile container */
+	.profile {
+		margin: 20px 0;
+	}
+
+	/* Profile sidebar */
+	.profile-sidebar {
+		padding: 20px 0 10px 0;
+		background: #fff;
+	}
+
+	.profile-userpic img {
+		float: none;
+		margin: 0 auto;
+		width: 50%;
+		height: 50%;
+		-webkit-border-radius: 50% !important;
+		-moz-border-radius: 50% !important;
+		border-radius: 50% !important;
+	}
+
+	.profile-usertitle {
+		text-align: center;
+		margin-top: 20px;
+	}
+
+	.profile-usertitle-name {
+		color: #5a7391;
+		font-size: 16px;
+		font-weight: 600;
+		margin-bottom: 7px;
+	}
+
+	.profile-usertitle-job {
+		text-transform: uppercase;
+		color: #5b9bd1;
+		font-size: 12px;
+		font-weight: 600;
+		margin-bottom: 15px;
+	}
+
+	.profile-userbuttons {
+		text-align: center;
+		margin-top: 10px;
+	}
+
+	.profile-userbuttons .btn {
+		text-transform: uppercase;
+		font-size: 11px;
+		font-weight: 600;
+		padding: 6px 15px;
+		margin-right: 5px;
+	}
+
+	.profile-userbuttons .btn:last-child {
+		margin-right: 0px;
+	}
+
+	.profile-usermenu {
+		margin-top: 30px;
+	}
+
+	.profile-usermenu ul li {
+		border-bottom: 1px solid #f0f4f7;
+	}
+
+	.profile-usermenu ul li:last-child {
+		border-bottom: none;
+	}
+
+	.profile-usermenu ul li a {
+		color: #93a3b5;
+		font-size: 14px;
+		font-weight: 400;
+	}
+
+	.profile-usermenu ul li a i {
+		margin-right: 8px;
+		font-size: 14px;
+	}
+
+	.profile-usermenu ul li a:hover {
+		background-color: #fafcfd;
+		color: #5b9bd1;
+	}
+
+	.profile-usermenu ul li.active {
+		border-bottom: none;
+	}
+
+	.profile-usermenu ul li.active a {
+		color: #5b9bd1;
+		background-color: #f6f9fb;
+		border-left: 2px solid #5b9bd1;
+		margin-left: -2px;
+	}
+
+	/* Profile Content */
+	.profile-content {
+		padding: 20px;
+		background: #fff;
+		min-height: 460px;
+	}
+	</style>
 </head>
 <body>
 <div class="container">
@@ -16,42 +124,129 @@
 					<div class="profile-usertitle-name">
 						{{name}}
 					</div>
-					<div class="profile-usertitle-job">
-						Dancer
-					</div>
 				</div>
 				<!-- END SIDEBAR USER TITLE -->
 				<!-- SIDEBAR BUTTONS -->
         <a href="#" class="thumbnail">
           <img src="_PdHa3ap.jpg" alt="Stuff" style="width:304px;height:228px;">
+
         </a>
 				<!-- END SIDEBAR BUTTONS -->
 				<!-- SIDEBAR MENU -->
 				<div class="profile-usermenu">
 					<ul class="nav">
-						<li class="active" n>
-							<a>
+						<li class="active">
+							<a href="#">
 							<i class="glyphicon glyphicon-home"></i>
 							Overview </a>
 						</li>
-						<li ng-click="Userpage()">
-							<a>
-							<i class="glyphicon glyphicon-user"></i>
+						<li>
+							<a data-toggle="modal" data-target="#usernameModal">
+							<i class="glyphicon glyphicon-cog"></i>
               <!-- Account Settings will allow the user to change email and password -->
-							Account Settings </a>
+							Change Username</a>
+						</li>
+                        <li>
+							<a data-toggle="modal" data-target="#emailModal">
+							<i class="glyphicon glyphicon-cog"></i>
+              <!-- Account Settings will allow the user to change email and password -->
+							Change Email </a>
+						</li>
+                        <li>
+							<a data-toggle="modal" data-target="#passwordModal">
+							<i class="glyphicon glyphicon-cog"></i>
+              <!-- Account Settings will allow the user to change email and password -->
+							Change Password </a>
 						</li>
 					</ul>
 				</div>
 				<!-- END MENU -->
 			</div>
+
 		</div>
-		<div class="col-md-9">
-            <div class="profile-content">
-			           My Email is {{email}}
-            </div>
+        <div class="row">
+              <div class="col-xs-4 col-md-4">
+    <div class="thumbnail">
+
+      <div class="caption">
+          <!-- Chuhan set up the name to be put here-->
+        <h3>Name of Project</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">View</a> <a href="#" class="btn btn-Danger" role="button">Delete</a></p>
+      </div>
+    </div>
+     <button type="button" class= "btn btn-success" ng-click="gonew()">New</button>
+  </div>
+</div>
+
+<!-- Modal Change Email-->
+<div class="modal fade" id="emailModal" tabindex="-1" role="dialog" aria-labelledby="emailModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">Change Email</h4>
+			</div>
+			<div class="modal-body">
+				New email<input type="email" ng-model = "changedemail">
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Save changes</button>
+			</div>
 		</div>
 	</div>
 </div>
+<!-- Modal Ends-->
+<!--Modal Change Password-->
+<div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">Change Password</h4>
+			</div>
+			<div class="modal-body">
+				New password<input type="text" ng-model = "changedpassword">
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--Modal Ends-->
+<!--Modal Username -->
+<div class="modal fade" id="usernameModal" tabindex="-1" role="dialog" aria-labelledby="usernameModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">Change Username</h4>
+			</div>
+			<div class="modal-body">
+				New Username<input type="text" ng-model = "changedusername">
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--Modal Ends-->
+	</div>
+    <div class="row">
+  <div class="col-lg-6">
+    <div class="input-group">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button">Go!</button>
+      </span>
+      <input type="text" class="form-control" placeholder="Search for Other Users">
+    </div><!-- /input-group -->
+</div>
+
 <br>
 <br>
 </body>
