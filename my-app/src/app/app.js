@@ -72,6 +72,8 @@ myapp.factory('User',function($http,$state,Respon){
 					Respon.data = response.data;
 					Respon.username = Respon.data["username"];
 					Respon.email = Respon.data["email"];
+					Respon.success = "yes";
+					Respon.password =pass;
 					$state.go("userProfile");
 				}
 		       else{ alert(response.data["success"]);
@@ -92,7 +94,7 @@ myapp.factory('User',function($http,$state,Respon){
 			}).then(function success(response){
 				if(response.data["success"]=="yes")
 				{
-					$state.go("login");
+					$state.go($state.current, {}, {reload: true});
 				}
 				else{
 					alert("somethingwrong");
@@ -109,8 +111,14 @@ myapp.factory('User',function($http,$state,Respon){
 		data:{},
 		username:"",
 		password:"",
-		email:""
+		email:"",
+		success:"no"
 	 };
+})
+.factory('Project',function(){
+	return{
+	projectname:""
+	};
 })
 .controller('AppCtrl',function($scope,$state){
 	
@@ -133,8 +141,7 @@ myapp.factory('User',function($http,$state,Respon){
 })
 .controller('LoginCtrl',function($state,$scope,$http,User){
 	
-	/*$scope.name = "jsmith";
-    $scope.email= "someone@smu.edu"*/
+	
 	$scope.log = function()
 	{
 		
@@ -149,22 +156,94 @@ myapp.factory('User',function($http,$state,Respon){
 })
 	.controller('userCtrl',function($state,$scope,$http,User,Respon){
 		
+		if(Respon.success!="yes")
+		{
+			$state.go("login");
+		}
 		$scope.name = Respon.username;
+		$scope.email = Respon.email;
 		$scope.gonew = function()
 		{
 			$state.go("newproject");
 		}
+		$scope.changeusername=function()
+		{
+			$http({
+				method:'POST',
+				url: 'http://affiniti.us/profile',
+				data: $.param({'newusername':$scope.changedname,'oldusername':$scope.name}),
+				headers:{'Content-Type':'application/x-www-form-urlencoded'}
+			}).then(function success(response){
+				if(response.data["success"]=="yes")
+				{
+				   Respon.username = $scope.changedname;
+				   $scope.name = Respon.username;
+				}
+				else{
+					alert("somethingwrong");
+				}
+			}, function error(response){
+				alert("Connection Fail")
+			});
+		}
+		$scope.changepass=function()
+		{
+			$http({
+				method:'POST',
+				url: ' http://affiniti.us/profile',
+				data: $.param({'newpass':$scope.changedpassword,'oldpass':$scope.oldpassword,'username':Respon.username}),
+				headers:{'Content-Type':'application/x-www-form-urlencoded'}
+			}).then(function success(response){
+				if(response.data["success"]=="yes")
+				{  
+					Respon.password = $scope.changedpassword;
+				}
+				else{
+					alert("somethingwrong");
+				}
+			}, function error(response){
+				alert("Connection Fail")
+			});
+		}
+		$scope.changeemail=function()
+		{
+			$http({
+				method:'POST',
+				url: ' http://affiniti.us/profile',
+				data: $.param({'newemail':$scope.changedemail,'username':Respon.username}),
+				headers:{'Content-Type':'application/x-www-form-urlencoded'}
+			}).then(function success(response){
+				if(response.data["success"]=="yes")
+				{
+					Respon.email = $scope.changedemail;
+					$scope.email = $scope.changedemail;
+				}
+				else{
+					alert("somethingwrong");
+				}
+			}, function error(response){
+				alert("Connection Fail")
+			});
+		}
 		
 		
 	})
-	.controller('newprojectCtrl',function($state,$scope,User){
+	
+	//end of userCtrl
+	
+	.controller('newprojectCtrl',function($state,$scope,User,Project){
+		
 		
 		$scope.gostepone = function()
 		{
-			$state.go("stepone");
+			Project.projectname = $scope.projectname;
+						$state.go("stepone");
 		}
 	})
-	.controller('steponeCtrl',function($state,$scope){
+	
+	
+	.controller('steponeCtrl',function($state,$scope,Project){
+		$scope.projectname = Project.projectname;
 		$scope.bulletpoints = [];
 		$scope.bullet="";
 		$scope.add= function()
