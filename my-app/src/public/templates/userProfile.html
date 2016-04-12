@@ -1,0 +1,295 @@
+<head>
+  	<!-- Author Canon Ellis-->
+<style>
+	body {
+		background: #F1F3FA;
+	}
+
+	/* Profile container */
+	.profile {
+		margin: 20px 0;
+	}
+
+	/* Profile sidebar */
+	.profile-sidebar {
+		padding: 20px 0 10px 0;
+		background: #fff;
+	}
+
+	.profile-userpic img {
+		float: none;
+		margin: 0 auto;
+		width: 50%;
+		height: 50%;
+		-webkit-border-radius: 50% !important;
+		-moz-border-radius: 50% !important;
+		border-radius: 50% !important;
+	}
+
+	.profile-usertitle {
+		text-align: center;
+		margin-top: 20px;
+	}
+
+	.profile-usertitle-name {
+		color: #5a7391;
+		font-size: 16px;
+		font-weight: 600;
+		margin-bottom: 7px;
+	}
+
+	.profile-usertitle-job {
+		text-transform: uppercase;
+		color: #5b9bd1;
+		font-size: 12px;
+		font-weight: 600;
+		margin-bottom: 15px;
+	}
+
+	.profile-userbuttons {
+		text-align: center;
+		margin-top: 10px;
+	}
+
+	.profile-userbuttons .btn {
+		text-transform: uppercase;
+		font-size: 11px;
+		font-weight: 600;
+		padding: 6px 15px;
+		margin-right: 5px;
+	}
+
+	.profile-userbuttons .btn:last-child {
+		margin-right: 0px;
+	}
+
+	.profile-usermenu {
+		margin-top: 30px;
+	}
+
+	.profile-usermenu ul li {
+		border-bottom: 1px solid #f0f4f7;
+	}
+
+	.profile-usermenu ul li:last-child {
+		border-bottom: none;
+	}
+
+	.profile-usermenu ul li a {
+		color: #93a3b5;
+		font-size: 14px;
+		font-weight: 400;
+	}
+
+	.profile-usermenu ul li a i {
+		margin-right: 8px;
+		font-size: 14px;
+	}
+
+	.profile-usermenu ul li a:hover {
+		background-color: #fafcfd;
+		color: #5b9bd1;
+	}
+
+	.profile-usermenu ul li.active {
+		border-bottom: none;
+	}
+
+	.profile-usermenu ul li.active a {
+		color: #5b9bd1;
+		background-color: #f6f9fb;
+		border-left: 2px solid #5b9bd1;
+		margin-left: -2px;
+	}
+
+	/* Profile Content */
+	.profile-content {
+		padding: 20px;
+		background: #fff;
+		min-height: 460px;
+	}
+	.t{
+		margin-right:1rem;
+	}
+	.projectb
+	{
+	
+		margin-top:1.5rem;
+		margin-left:auto;
+	}
+	.card
+	{   padding:1.5rem;
+		box-shadow: 5px 5px 10px 0px;
+		height:auto;
+		box-shadow: border-box;
+	}
+	.newp
+	{
+		margin-right:1rem;
+		margin-top:2rem;
+		float:right;
+		clear:left;
+		
+	}
+	</style>
+</head>
+<body>
+<div class="container">
+    <div class="row profile">
+		<div class="col-xs-3">
+			<div class="profile-sidebar">
+				<!-- SIDEBAR USERPIC -->
+				<div class="profile-userpic">
+				</div>
+				<!-- END SIDEBAR USERPIC -->
+				<!-- SIDEBAR USER TITLE -->
+				<div class="profile-usertitle">
+					<div class="profile-usertitle-name">
+						{{name}}
+					</div>
+				</div>
+				<!-- END SIDEBAR USER TITLE -->
+				<!-- SIDEBAR BUTTONS -->
+        <a href="#" class="thumbnail">
+          <img src="img/annymous.jpg" alt="User" style="width:200px;height:200px;">
+
+        </a>
+				<!-- END SIDEBAR BUTTONS -->
+				<!-- SIDEBAR MENU -->
+				<div class="profile-usermenu">
+					<ul class="nav">
+						<li>
+							<a data-toggle="modal" data-target="#overviewModal">
+							<i class="fa fa-info-circle"></i>
+							Overview </a>
+						</li>
+						<li>
+							<a data-toggle="modal" data-target="#usernameModal">
+							<i class="glyphicon glyphicon-cog"></i>
+              <!-- Account Settings will allow the user to change email and password -->
+							Change Username</a>
+						</li>
+                        <li>
+							<a data-toggle="modal" data-target="#emailModal">
+							<i class="glyphicon glyphicon-cog"></i>
+              <!-- Account Settings will allow the user to change email and password -->
+							Change Email </a>
+						</li>
+                        <li>
+							<a data-toggle="modal" data-target="#passwordModal">
+							<i class="glyphicon glyphicon-cog"></i>
+              <!-- Account Settings will allow the user to change email and password -->
+							Change Password </a>
+						</li>
+					</ul>
+				</div>
+				<!-- END MENU -->
+			</div>
+
+		</div>
+        
+          <div class="col-xs-4">
+            <div class="card">
+             <h3>Name of Project</h3>
+		       <button  class="btn btn-primary projectb" role="button">View</button> 
+		       <button class="btn btn-Danger projectb" role="button">Delete</button>
+      
+              </div>
+				<div class="row">
+    		 	<button type="button" class= "btn btn-success newp" ng-click="gonew()">New</button>
+    			</div>
+  </div>
+
+<!-- Modal Change Email-->
+<div class="modal fade" id="emailModal" tabindex="-1" role="dialog" aria-labelledby="emailModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">Change Email</h4>
+			</div>
+			<div class="modal-body">
+				<label class="t">New Email</label><input type="email" ng-model = "changedemail">
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="changeemail()">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Modal Ends-->
+<!--Modal Change Password-->
+<div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">Change Password</h4>
+			</div>
+			<div class="modal-body">
+			    <label class="t">Old password</label><input type="text" ng-model="oldpassword">
+				<label class="t">New Password</label><input type="text" ng-model = "changedpassword">
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="changepass()">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--Modal Ends-->
+<!--Modal Username -->
+<div class="modal fade" id="usernameModal" tabindex="-1" role="dialog" aria-labelledby="usernameModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">Change Username</h4>
+			</div>
+			<div class="modal-body">
+				<label class="t">New Username</label><input type="text" ng-model = "changedname">
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="changeusername()">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--Modal Ends-->
+<!--Modal Overview-->
+<div class="modal fade" id="overviewModal" tabindex="-1" role="dialog" aria-labelledby="overviewModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">Overview</h4>
+			</div>
+			<div class="modal-body">
+				<ul class="list-group">
+				  <li class="list-group-item">{{"UserName: "+name}}</li>
+				  <li class="list-group-item">{{"Email: "+email}}</li>
+				</ul>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--Modal Ends-->
+	</div>
+    <div class="row">
+  <div class="col-lg-6">
+    <div class="input-group">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button">Go!</button>
+      </span>
+      <input type="text" class="form-control" placeholder="Search for Other Users">
+    </div><!-- /input-group -->
+</div>
+
+<br>
+<br>
+</body>
