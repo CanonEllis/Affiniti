@@ -7,7 +7,7 @@
 <style>
 
 body {
-    background-color: #2C3E50;
+	background-color: #2C3E50;
 }
 /**
  * For the correct positioning of the placeholder element, the dnd-list and
@@ -23,8 +23,8 @@ body {
  * otherwise you can't drop to it once it's empty
  */
 .simpleDemo ul[dnd-list] {
-    min-height: 42px;
-    padding-left: 0px;
+	min-height: 42px;
+	padding-left: 0px;
 }
 
 /**
@@ -34,7 +34,7 @@ body {
  * that he's actually moving it.
  */
 .simpleDemo ul[dnd-list] .dndDraggingSource {
-    display: none;
+	display: none;
 }
 
 /**
@@ -43,9 +43,9 @@ body {
  * over it.
  */
 .simpleDemo ul[dnd-list] .dndPlaceholder {
-    display: block;
-    background-color: #CDD0D1; /* shadow behind */
-    min-height: 42px;
+	display: block;
+	background-color: #CDD0D1; /* shadow behind */
+	min-height: 42px;
 }
 
 /**
@@ -56,39 +56,39 @@ body {
  * browsers we can use event.offsetY for this.
  */
 .simpleDemo ul[dnd-list] li {
-    background-color: #ECF0F1;
-    border: 1px solid #ddd;
-    border-top-right-radius: 4px;
-    border-top-left-radius: 4px;
-    display: block;
-    padding: 10px 15px;
-    margin-bottom: -1px;
+	background-color: #ECF0F1;
+	border: 1px solid #ddd;
+	border-top-right-radius: 4px;
+	border-top-left-radius: 4px;
+	display: block;
+	padding: 10px 15px;
+	margin-bottom: -1px;
 }
 
 /**
  * Show selected elements in green
  */
 .simpleDemo ul[dnd-list] li.selected {
-    background-color: #dff0d8;
-    color: #3c763d;
+	background-color: #dff0d8;
+	color: #3c763d;
 }
 .simpleDemo
 {
-    width:100%;
-    display: inline-block;
-    height:auto;
-    text-align: center;
-    font-family: 'RobotoDraft', 'Roboto', sans-serif;
-    font-size: 10px;
+	width:100%;
+	display: inline-block;
+	height:auto;
+	text-align: center;
+	font-family: 'RobotoDraft', 'Roboto', sans-serif;
+	font-size: 10px;
 }
 
 .center {
-    margin: auto;
-    width: 60%;
-    padding: 20px;
-    background: #3498DB;
-    box-shadow: 5px 5px 5px #333333;
-        
+	margin: auto;
+	width: 60%;
+	padding: 20px;
+	background: #3498DB;
+	box-shadow: 5px 5px 5px #333333;
+		
 }
 .panel
 {   
@@ -101,47 +101,81 @@ body {
   }
 .btn
 {
-    margin:auto;
-    margin-left:5%;
+	margin:auto;
+	margin-left:5%;
 }
+.mygroup
+{
+	
+}
+.list-group
+{  
+	max-height:0;
+    overflow: hidden;
+    transition:max-height 1s;
+	width:auto;
+	border:10px;
+	
+	}
+.mygroup:hover .mygroupul{
+	max-height:999px;
+	transition: max-height 1s;
+}
+.cool
+{
+	background-color:black;
+}
+
 </style>
 
 </head>
 <body>
 <!-- The dnd-list directive allows to drop elements into it.
-     The dropped data will be added to the referenced list -->
+	 The dropped data will be added to the referenced list -->
 
 <div class="center">
  <div class="panel panel-default"  ng-repeat="list in models.lists | filter:NewGroup track by $index">
    <div class="panel-heading" > <p ng-show="!list.select" ng-click="changegroupname(list)">{{list.name}}</p>
 
-    <div class="input-group" ng-show= "list.select">
-        <input type="text" class="form-control" ng-model="list.name">
-        <span class="input-group-addon btn btn-primary" ng-click="confirm(list)">confirm</span>
-    </div>
+	<div class="input-group" ng-show= "list.select">
+		<input type="text" class="form-control" ng-model="list.name">
+		<span class="input-group-addon btn btn-primary" ng-click="confirm(list)">confirm</span>
+	</div>
    </div>
    <div class="panel-body">
    <div class="simpleDemo">
-     <ul dnd-list="list.l">
-    <li 
-        ng-repeat="item in list.l | filter:NewGroup track by $index"
-        dnd-draggable="item"
-        dnd-moved="list.l.splice($index, 1)"
-        dnd-effect-allowed="move"
-        dnd-selected="models.selected = item"
-        ng-class="{'selected': models.selected === item}"
-        >
-        {{item}}
-    </li>
+	 <ul dnd-list="list.l">
+	<li 
+		ng-repeat="item in list.l | filter:NewGroup track by $index"
+		dnd-draggable="item"
+		dnd-moved="list.l.splice($index, 1)"
+		dnd-effect-allowed="move"
+		dnd-selected="models.selected = item"
+		ng-class="{'selected': models.selected === item}"
+		>
+		
+		<div class="mygroup ">
+			<h4>
+				{{item.name}}
+			</h4>
+			<div>
+			 <ul  class="mygroupul list-group">
+				<li class="list-group-item" ng-repeat="elem in item.l" >{{elem}}</li>
+			</ul>
+			</div>
+		</div>
+		
+		
+	</li>
    </div>
    </div>
    </div>
    <div>
-   <button class="btn btn-success" ng-click="newgroup()">New Group</button>
+   <button class="btn btn-success" ng-click="newgroup()">New Groups</button>
    <span class="btn btn-primary" ng-click="gostepthree()">Next Step</span>
    <span class ="btn btn-danger" dnd-list="[]">Transh <i class="fa fa-trash" aria-hidden="true"></i></span>
-    
-       </div>
+	
+	   </div>
 </div>
 
 

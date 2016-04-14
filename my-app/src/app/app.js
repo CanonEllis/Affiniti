@@ -90,6 +90,14 @@ var myapp=angular.module('app', [require("angular-ui-router"),"dndLists"])
 			controller:"steptwoCtrl"
 		}
 	)
+	.state(
+		'stepthree',
+		{
+			url:"/stepthree",
+			templateUrl:"templates/stepthree.html",
+			controller:"stepthreeCtrl"
+		}
+	)
 });
 myapp.factory('User',function($http,$state,Respon){
 	
@@ -333,6 +341,44 @@ myapp.factory('User',function($http,$state,Respon){
 			list["select"]=false;
 			
 		}	
+		$scope.gostepthree=function()
+		{
+			Project.ideas = $scope.models.lists;
+			$state.go("stepthree");
+		}
+	})
+	.controller('stepthreeCtrl',function($state,$scope,Project)
+	{
+		$scope.models = {
+			selected: null,
+			lists:[]
+		};
+
+		// Generate initial model
+		$scope.models.lists.push({"name":"Your Groups","l":Project.ideas,"select":false});
+
+		// Model to JSON for demo purpose
+		$scope.$watch('models', function(model) {
+			$scope.modelAsJson = angular.toJson(model, true);
+		}, true);	
+		$scope.newgroup=function()
+		{
+			$scope.models.lists.push({"name":"New Groups","l":[],"select":false});
+		}
+		$scope.changegroupname=function(list)
+		{
+			 list["select"]=true
+		}
+		$scope.confirm=function(list)
+		{
+			list["select"]=false;
+			
+		}	
+		$scope.gostepthree=function()
+		{
+			Project.ideas = $scope.models.lists;
+			$state.go("stepthree");
+		}
 	});
 	
 	
