@@ -79,16 +79,31 @@ body {
     height:auto;
     text-align: center;
     font-family: 'RobotoDraft', 'Roboto', sans-serif;
-    font-size: 18px;
+    font-size: 10px;
 }
 
 .center {
     margin: auto;
-    width: 50%;
-    padding: 10px;
-    background: #3498DB
+    width: 60%;
+    padding: 20px;
+    background: #3498DB;
+    box-shadow: 5px 5px 5px #333333;
+        
 }
-
+.panel
+{   
+   width:40%;
+   margin:5%;
+   display: inline-block;
+   box-shadow: 5px 5px 5px #333333;
+   box-sizing: border-box;
+   transition: height 1s;
+  }
+.btn
+{
+    margin:auto;
+    margin-left:5%;
+}
 </style>
 
 </head>
@@ -97,33 +112,35 @@ body {
      The dropped data will be added to the referenced list -->
 
 <div class="center">
-<div class="simpleDemo">
-<ul dnd-list="models.lists.A">
+ <div class="panel panel-default"  ng-repeat="list in models.lists | filter:NewGroup track by $index">
+   <div class="panel-heading" > <p ng-show="!list.select" ng-click="changegroupname(list)">{{list.name}}</p>
+
+    <div class="input-group" ng-show= "list.select">
+        <input type="text" class="form-control" ng-model="list.name">
+        <span class="input-group-addon btn btn-primary" ng-click="confirm(list)">confirm</span>
+    </div>
+   </div>
+   <div class="panel-body">
+   <div class="simpleDemo">
+     <ul dnd-list="list.l">
     <li 
-        ng-repeat="item in models.lists.A"
+        ng-repeat="item in list.l | filter:NewGroup track by $index"
         dnd-draggable="item"
-        dnd-moved="models.lists.A.splice($index, 1)"
+        dnd-moved="list.l.splice($index, 1)"
         dnd-effect-allowed="move"
         dnd-selected="models.selected = item"
         ng-class="{'selected': models.selected === item}"
         >
-        {{item.label}}
+        {{item}}
     </li>
- </div>
-<div class="simpleDemo">
-</ul>
-<ul  dnd-list="models.lists.B">
-  <li 
-    ng-repeat="item in models.lists.B"
-    dnd-draggable="item"
-    dnd-moved="models.lists.B.splice($index, 1)"
-    dnd-effect-allowed="move"
-    dnd-selected="models.selected = item"
-    ng-class="{'selected': models.selected === item}"
-    >
-    {{item.label}}
-</li>
-</div>
+   </div>
+   </div>
+   </div>
+   <div>
+   <button class="btn btn-success" ng-click="newgroup()">New Group</button>
+   <span class ="btn btn-danger" dnd-list="[]">Transh <i class="fa fa-trash" aria-hidden="true"></i></span>
+    
+       </div>
 </div>
 
 

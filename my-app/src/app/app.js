@@ -153,7 +153,8 @@ myapp.factory('User',function($http,$state,Respon){
 })
 .factory('Project',function(){
 	return{
-	projectname:""
+	projectname:"",
+	ideas:[]
 	};
 })
 .controller('AppCtrl',function($scope,$state){
@@ -302,25 +303,36 @@ myapp.factory('User',function($http,$state,Respon){
 		
 		$scope.gosteptwo=function()
 		{
+			Project.ideas =$scope.bulletpoints;
 			$state.go("steptwo");
 		}
 	})
 	.controller('steptwoCtrl',function($state,$scope,Project){
 		$scope.models = {
 			selected: null,
-			lists: {"A": [], "B": []}
+			lists:[]
 		};
 
 		// Generate initial model
-		for (var i = 1; i <= 3; ++i) {
-			$scope.models.lists.A.push({label: "Item A" + i});
-			$scope.models.lists.B.push({label: "Item B" + i});
-		}
+		$scope.models.lists.push({"name":"Original","l":Project.ideas,"select":false});
 
 		// Model to JSON for demo purpose
 		$scope.$watch('models', function(model) {
 			$scope.modelAsJson = angular.toJson(model, true);
-		}, true);		
+		}, true);	
+		$scope.newgroup=function()
+		{
+			$scope.models.lists.push({"name":"NewGroup","l":[],"select":false});
+		}
+		$scope.changegroupname=function(list)
+		{
+			 list["select"]=true
+		}
+		$scope.confirm=function(list)
+		{
+			list["select"]=false;
+			
+		}	
 	});
 	
 	
