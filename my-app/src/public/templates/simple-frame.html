@@ -1,7 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900|RobotoDraft:400,100,300,500,700,900'>
+
+
 <style>
+
+body {
+    background-color: #2C3E50;
+}
 /**
  * For the correct positioning of the placeholder element, the dnd-list and
  * it's children must have position: relative
@@ -37,7 +44,7 @@
  */
 .simpleDemo ul[dnd-list] .dndPlaceholder {
     display: block;
-    background-color: #ddd;
+    background-color: #CDD0D1; /* shadow behind */
     min-height: 42px;
 }
 
@@ -49,7 +56,7 @@
  * browsers we can use event.offsetY for this.
  */
 .simpleDemo ul[dnd-list] li {
-    background-color: #fff;
+    background-color: #ECF0F1;
     border: 1px solid #ddd;
     border-top-right-radius: 4px;
     border-top-left-radius: 4px;
@@ -67,16 +74,29 @@
 }
 .simpleDemo
 {
-    width:30%;
+    width:100%;
     display: inline-block;
     height:auto;
+    text-align: center;
+    font-family: 'RobotoDraft', 'Roboto', sans-serif;
+    font-size: 18px;
 }
+
+.center {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    background: #3498DB
+}
+
 </style>
 
 </head>
 <body>
 <!-- The dnd-list directive allows to drop elements into it.
      The dropped data will be added to the referenced list -->
+
+<div class="center">
 <div class="simpleDemo">
 <ul dnd-list="models.lists.A">
     <li 
@@ -104,5 +124,8 @@
     {{item.label}}
 </li>
 </div>
+</div>
+
+
 </body>
 </html>
