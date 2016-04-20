@@ -32,6 +32,21 @@
     float:right;
   }
 
+  li:before {
+    /*Using a Bootstrap glyphicon as the bullet point*/
+    content: "\e080";
+    font-family: 'Glyphicons Halflings';
+    font-size: 9px;
+    float: left;
+    margin-top: 4px;
+    margin-left: 7px;
+    margin-right: 10px;
+    color: black;
+}
+
+
+
+
       .header{
         font-size:3rem;
       }
@@ -44,14 +59,14 @@
           <div class="input-group">
            <input type="text" class="form-control" placeholder="Add your Bulletpoints" ng-model="bullet">
              <span class="input-group-btn">
-              <button class="btn btn-primary" type="button" ng-click="add()">Add!</button>
+              <button class="btn btn-primary" type="button" ng-click="add()">Add<i class="fa fa-plus fa-fw" aria-hidden="true"></i></button>
              </span>
             </div>
             <ul class="list-group">
               <li class="list-group-item" ng-repeat = "b in bulletpoints">{{b}}<span class="cha" ng-click="delete(b)"><i class="fa fa-times"></i></span></li>
-         </ul>         
+            </ul>         
                 
-          <a ng-click="gosteptwo()" class="btn btn-primary">Next Step</a>
+          <a ng-click="gosteptwo()" class="btn btn-primary ">Next Step<i class="fa fa-angle-double-right fa-lg fa-fw" aria-hidden="true"></i></a>
       </div>
    </body>
 </html>
