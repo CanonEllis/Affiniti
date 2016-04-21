@@ -56,7 +56,9 @@
 </div>
 	 <div class= "panel panel-default">
 		<div class="panel-body">
-						 <form>
+		       <div class="alert alert-info" ng-show ="!timeout" role="alert" id ="remain"></div>
+		        <div class="alert alert-danger" ng-show ="timeout" role="alert">Oh no! Maybe you need more time.</div>
+								 <form>
 								<div class="form-group">
 									<input type="text" class = "form-control" ng-model="idea1" placeholder="1">
 								</div>

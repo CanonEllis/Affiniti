@@ -61,7 +61,27 @@
 				</ul>
 			  </div>	
             </div>
-			<div class="btns"><button class="btn btn-primary" ng-click="sumb()">Finish</button> <button type="button" class="btn btn-default">First Four Thoughts</button> <a class="btn btn-warning" ng-click="back()">Back</a> <div>
+			<div class="btns"><button class="btn btn-primary" ng-click="sumb()">Finish</button> <button type="button" class="btn btn-default" data-toggle="modal" data-target="#fourModal">First Four Thoughts</button> <a class="btn btn-warning" ng-click="back()">Back</a> </div>
 		</div>	
+	<!--modal-->	
+		
+	<div class="modal fade" id="fourModal" tabindex="-1" role="dialog" aria-labelledby="fourModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">Your Four Thoughts</h4>
+				</div>
+				<div class="modal-body">
+					<ul class="list-group">
+					  <li class="list-group-item" ng-repeat="it in f">{{it}}</li>
+					</ul>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
 	</body>
 </html>

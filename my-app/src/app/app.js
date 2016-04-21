@@ -225,6 +225,7 @@ myapp.factory('User',function($http,$state,Respon,Project){
 	username:"",
 	projectname:"",
 	mainIdea:"",
+	four:[],
 	ideas:[],
 	group:[],
 	groups:[]
@@ -489,6 +490,8 @@ myapp.factory('User',function($http,$state,Respon,Project){
 		$scope.groups = Project.groups;
 		$scope.projectname=Project.projectname;
 		$scope.mainIdea = Project.mainIdea;
+		$scope.f = Project.four;
+	
 		$scope.back=function()
 		{
 			window.history.back();
@@ -505,9 +508,35 @@ myapp.factory('User',function($http,$state,Respon,Project){
 		}
 			})
 	.controller('fourCtrl',function($state,$scope,Project,User){
-		
+		$scope.mainIdea =Project.mainIdea;
+		$scope.timeout = false;
+		var total =10000;
+		var s,m,c;
+		function count()
+		{  			
+			m = parseInt(total/60000);
+			s = total%60000;
+			s = s/1000;
+			if(s<10){s= "0"+s;}
+		   if($scope.timeout==false) document.getElementById("remain").innerHTML="Your Time Remaining: "+m+":"+s;
+			if(m<=0&&s<=0)
+			{
+				$scope.timeout=true;
+				clearTimeout(c)
+				$scope.$apply();	
+				
+			}
+			total = total -1000;
+		  if($scope.timeout == false) c=setTimeout(count, 1000);
+		}
+		count();
 		$scope.gostepone=function()
 		{
+			Project.four[0] = $scope.idea1;
+			Project.four[1] = $scope.idea2;
+			Project.four[2] = $scope.idea3;
+			Project.four[3] = $scope.idea4;
+			$scope.timeout = true;
 			$state.go("stepone");
 		}
 	});
