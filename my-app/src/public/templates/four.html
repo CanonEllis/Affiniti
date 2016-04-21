@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<meta charset="UTF-8">
+		<title>Affiniti</title>
+		
+		<!--link rel="stylesheet" href="css/reset.css"-->
+
+	 <style>
+ body {
+		background: #2C3E50;
+		color: #ECF0F1;
+		font-family: 'RobotoDraft', 'Roboto', sans-serif;
+		font-size: 14px;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+	/* Pen Title */
+	.pen-title {
+		padding: 50px 0;
+		text-align: center;
+		letter-spacing: 2px;
+	}
+	.pen-title h1 {
+		margin: 0 0 20px;
+		font-size: 48px;
+		font-weight: 300;
+	}
+	.pen-title span {
+		font-size: 12px;
+	}
+	.pen-title span .fa {
+		color: #33b5e5;
+	}
+	.pen-title span a {
+		color: #33b5e5;
+		font-weight: 600;
+		text-decoration: none;
+	}
+ .panel{
+	margin:auto;
+	width:40%;
+	padding:30px;
+	background-color:#818181;
+	border-width: 0px;
+	box-shadow: 5px 5px 5px #333333;
+	}
+	</style>
+</head>
+<body>
+
+<div class="pen-title">
+	<h1>QUICK!</h1>
+	<h1>Enter Four Ideas Related to</h1>
+	<h1>{{mainIdea}}</h1>
+</div>
+	 <div class= "panel panel-default">
+		<div class="panel-body">
+						 <form>
+								<div class="form-group">
+									<input type="text" class = "form-control" ng-model="idea1" placeholder="1">
+								</div>
+								<div class="form-group">
+									<input type="text" class="form-control" ng-model="idea2" placeholder="2">
+								</div>
+								<div class="form-group">
+									<input type="text" class = "form-control" ng-model="idea3" placeholder="3">
+								</div>
+								<div class="form-group">
+									<input type="text" class="form-control" ng-model="idea4" placeholder="4">
+								</div>
+							</form>
+								<button class="btn btn-primary pull-right" ng-click="gostepone()">Submit</button>
+						
+		</div>
+		</div>
+</body>
+</html>

@@ -111,8 +111,8 @@ var myapp=angular.module('app', [require("angular-ui-router"),"dndLists"])
 	{
 		url:"/viewproject",
 		templateUrl:"templates/viewproject.html",
-		controller:"viewprojectCtrl"
-	}
+		controller:"finalViewCtrl"
+	})
 	.state(
 		'four',
 		{
@@ -121,7 +121,7 @@ var myapp=angular.module('app', [require("angular-ui-router"),"dndLists"])
 			controller:"fourCtrl"
 		}
 	)
-	)
+	
 });
 myapp.factory('User',function($http,$state,Respon,Project){
 	
@@ -137,14 +137,20 @@ myapp.factory('User',function($http,$state,Respon,Project){
 			}).then(function success(response){
 		       if(response.data["success"]=="yes")
 		        {
-					Respon.data = response.data;
-					Respon.username = Respon.data["username"];
-					Respon.email = Respon.data["email"];
+					//Respon.data = response.data["projects"];
+					Respon.data = $.map(response.data["projects"], function(value, index) {
+						return [value];
+					});					
+					Respon.username = response.data["username"];
+					Respon.email = response.data["email"];
 					Respon.success = "yes";
 					Respon.password =pass;
 					Project.username = Respon.username;
+					if(Respon.success=="yes")
+					{
+						$state.go("userProfile");
+					}
 					
-					$state.go("userProfile");
 				}
 		       else{ alert(response.data["success"]);
 			         //alert("wrong password or username");
@@ -186,6 +192,20 @@ myapp.factory('User',function($http,$state,Respon,Project){
 					},function error(response){
 						alert("somthingwrong");
 					});
+		},
+		Delete:function(username,projectname)
+		{
+			return $http({
+				method:'DELETE',
+				url:'http://affiniti.us/delete',
+				data: $.param({'username':username,'diagramname':projectname}),
+				headers:{'Content-Type':'application/x-www-form-urlencoded'}
+			}).then(function success(response){
+				if(response.data.deleted!='yes')
+				{
+					alert(response.data);
+				}
+			},function error(response){});
 		}
 		};
 	
@@ -197,6 +217,7 @@ myapp.factory('User',function($http,$state,Respon,Project){
 		password:"",
 		email:"",
 		success:"no"
+	
 	 };
 })
 .factory('Project',function(){
@@ -228,14 +249,13 @@ myapp.factory('User',function($http,$state,Respon,Project){
 		$state.go("login");
 	}
 })
-.controller('LoginCtrl',function($state,$scope,$http,User){
+.controller('LoginCtrl',function($state,$scope,$http,User,Respon){
 	
 	
 	$scope.log = function()
 	{
-		
+	
 		User.Login($scope.username,$scope.password);
-			//$state.go("userProfile");
 								
 	}
 	$scope.register=function()
@@ -243,14 +263,29 @@ myapp.factory('User',function($http,$state,Respon,Project){
 		User.SignUp($scope.firstname,$scope.lastname,$scope.username,$scope.password,$scope.email);
 	}
 })
-	.controller('userCtrl',function($state,$scope,$http,User,Respon){
+	.controller('userCtrl',function($state,$scope,$http,User,Respon,Project){
 		
-		if(Respon.success!="yes")
-		{
-			$state.go("login");
-		}
+	
+		if(Respon.success!="yes") $state.go("login");
+        $scope.projects = Respon.data;
 		$scope.name = Respon.username;
 		$scope.email = Respon.email;
+		$scope.delete=function(project)
+		{
+			User.Delete(project.username,project.projectname);
+			$scope.projects.splice($scope.projects.indexOf(project), 1);
+		
+		}
+		$scope.view=function(project)
+		{
+			Project.projectname = project.projectname;
+			Project.mainIdea = project.mainIdea;
+			Project.ideas = project.ideas;
+			Project.group = project.group;
+			Project.groups = project.groups;
+	
+			$state.go('viewproject');
+		}
 		$scope.gonew = function()
 		{
 			$state.go("newproject");
@@ -328,7 +363,7 @@ myapp.factory('User',function($http,$state,Respon,Project){
 		{
 			Project.projectname = $scope.projectname;
 			Project.mainIdea = $scope.mainIdea;
-						$state.go("stepone");
+						$state.go("four");
 		}
 	})
 	
@@ -450,7 +485,7 @@ myapp.factory('User',function($http,$state,Respon,Project){
 			window.history.back();
 		}		
 	})
-	.controller('finalViewCtrl',function($state,$scope,Project,User){
+	.controller('finalViewCtrl',function($state,$scope,Project,User,Respon){
 		$scope.groups = Project.groups;
 		$scope.projectname=Project.projectname;
 		$scope.mainIdea = Project.mainIdea;
@@ -463,11 +498,18 @@ myapp.factory('User',function($http,$state,Respon,Project){
 	
 			
 			User.Sub(JSON.stringify(Project));
+			var p = {};
+			angular.copy(Project,p);
+			Respon.data.push(p);
+			$state.go('userProfile');
 		}
 			})
 	.controller('fourCtrl',function($state,$scope,Project,User){
 		
-		
+		$scope.gostepone=function()
+		{
+			$state.go("stepone");
+		}
 	});
 	
 	

@@ -141,12 +141,34 @@
 	{
 		color:black;
 	}
+	.proj{
+		background-color:white;
+		color:black;
+		border-radius: 5px;
+		width:40%;
+		margin-left:5%;
+		margin-bottom:5%;
+		height:auto;
+		display: inline-block;
+		padding:20px
+	}
+	.btns
+	{
+		text-align: center;
+	}
+	.btn{
+		margin-left:10px;
+	}
+	.search
+	{
+		margin-left:80px;
+	}
 	</style>
 </head>
 <body>
 <div class="container">
     <div class="row profile">
-		<div class="col-xs-3">
+		<div class="col-sm-3">
 			<div class="profile-sidebar">
 				<!-- SIDEBAR USERPIC -->
 				<div class="profile-userpic">
@@ -198,16 +220,16 @@
 
 		</div>
         
-          <div class="col-xs-4">
-            <div class="card">
-             <h3>Name of Project</h3>
-		       <button  class="btn btn-primary projectb" role="button">View</button> 
-		       <button class="btn btn-Danger projectb" role="button">Delete</button>
-      
-              </div>
-				<div class="row">
-    		 	<button type="button" class= "btn btn-success newp" ng-click="gonew()">New</button>
-    			</div>
+          <div class="col-sm-8">
+            <div class="proj" ng-repeat="proj in projects | filter: proj track by $index">
+  				<p>{{proj.projectname}}</p>
+				<div class="btns"><button class="btn btn-primary" ng-click="view(proj)">View</button><button class="btn btn-danger" ng-click="delete(proj)">Delete</button></div>
+            </div>
+           <div class="proj">
+             <p>Affiniti Now</p>
+             <div class="btns"><button class="btn btn-success" ng-click="gonew()">New</button></div>
+           </div>
+    	  </div>
   </div>
 
 <!-- Modal Change Email-->
@@ -291,13 +313,10 @@
 <!--Modal Ends-->
 	</div>
     <div class="row">
-  <div class="col-lg-6">
-    <div class="input-group">
-      <span class="input-group-btn">
-        <button class="btn btn-default" type="button">Go!</button>
-      </span>
+  <div class="col-sm-11 search">
+    <form>
       <input type="text" class="form-control" placeholder="Search for Other Users">
-    </div><!-- /input-group -->
+    </form><!-- /input-group -->
 </div>
 
 <br>
