@@ -223,11 +223,11 @@
           <div class="col-sm-8">
             <div class="proj" ng-repeat="proj in projects | filter: proj track by $index">
   				<p>{{proj.projectname}}</p>
-				<div class="btns"><button class="btn btn-primary" ng-click="view(proj)">View</button><button class="btn btn-danger" ng-click="delete(proj)">Delete</button></div>
+				<div class="btns"><button class="btn btn-primary" ng-click="view(proj)">View<i class="fa fa-eye fa-fw" aria-hidden="true"></i></button><button class="btn btn-danger" ng-click="delete(proj)">Delete<i class="fa fa-trash fa-fw" aria-hidden="true"></i></button></div>
             </div>
            <div class="proj">
-             <p>Affiniti Now</p>
-             <div class="btns"><button class="btn btn-success" ng-click="gonew()">New</button></div>
+             <p>Create A New Project</p>
+             <div class="btns"><button class="btn btn-success" ng-click="gonew()">New<i class="fa fa-plus fa-fw" aria-hidden="true"></i></button></div>
            </div>
     	  </div>
   </div>
@@ -312,7 +312,7 @@
 </div>
 <!--Modal Ends-->
 	</div>
-    <div class="row">
+<!--    <div class="row">
   <div class="col-sm-11 search">
     <form>
       <input type="text" class="form-control" placeholder="Search for Other Users">

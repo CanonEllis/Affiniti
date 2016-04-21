@@ -510,7 +510,7 @@ myapp.factory('User',function($http,$state,Respon,Project){
 	.controller('fourCtrl',function($state,$scope,Project,User){
 		$scope.mainIdea =Project.mainIdea;
 		$scope.timeout = false;
-		var total =10000;
+		var total =180000;
 		var s,m,c;
 		function count()
 		{  			
