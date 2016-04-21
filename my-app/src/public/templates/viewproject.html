@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+		body
+		{
+			background-color:#2C3E50;
+		}
+		  .groupsview{
+			
+			width:40%;
+			display: inline-block;
+			margin-left:5%;
+			margin-right:5%;
+			box-shadow: 5px 5px 5px #333333;
+		}
+		.panel-info
+		{
+			margin-top:10px;
+			margin-left:5%;
+			margin-right:5%;
+		}
+		.list-group-heading
+		{
+			margin:auto;
+		}
+		.jumbotron
+		{
+			width:90%;
+			margin:auto;
+			background-color:#818181;
+					}
+		
+		.projectname{
+			text-align: center;
+			font-family: 'RobotoDraft', 'Roboto', sans-serif;
+			color:white;
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+				}
+					.btns{
+						text-align: center;
+					}
+					.btn{
+						margin:20px;
+					}
+		</style>
+	</head>
+	<body>
+	 <div class = "projectname"> <h1>{{projectname}}</h1> </div>
+	  <div class="projectname"><h3>{{mainIdea}}</h3></div>
+			<div class="jumbotron">
+            <div class="panel panel-primary groupsview clearfix" ng-repeat="group in groups">
+               <div class ="panel-heading">{{group.name}}</div>
+               <div class ="panel panel-info" ng-repeat ="list in group.l">
+                 <div class="panel-heading">{{list.name}}</div>
+  				<ul class="list-group">
+                   <li class="list-group-item" ng-repeat = "item in list.l">{{item}} </li>
+				</ul>
+			  </div>	
+            </div>
+			<div class="btns"> <button type="button" class="btn btn-default">First Four Thoughts</button> <a class="btn btn-warning" ng-click="back()">Back</a> <div>
+		</div>	
+	</body>
+</html>

@@ -125,22 +125,31 @@ body {
 {
 	background-color:black;
 }
+.cha{
+	float:right;
+}
+.titl{
+	text-align: center;
+	color:white;
 
+	}
+	.titl h1{
+		font-family: 'RobotoDraft', 'Roboto', sans-serif;
+		font-weight: 300;
+		    }
 </style>
 
 </head>
 <body>
 <!-- The dnd-list directive allows to drop elements into it.
 	 The dropped data will be added to the referenced list -->
-
+<div class="titl"><h1>Grouping Your Groups</h1></div>
 <div class="center">
  <div class="panel panel-default"  ng-repeat="list in models.lists | filter:NewGroup track by $index">
-   <div class="panel-heading" > <p ng-show="!list.select" ng-click="changegroupname(list)">{{list.name}}</p>
-
-	<div class="input-group" ng-show= "list.select">
-		<input type="text" class="form-control" ng-model="list.name">
-		<span class="input-group-addon btn btn-primary" ng-click="confirm(list)">confirm</span>
-	</div>
+   <div class="panel-heading" > <p ng-show="!list.select" ng-click="changegroupname(list)">{{list.name}}<span class="cha" ng-click="delete(list)"><i class="fa fa-times"></i></p>
+	<form  ng-show= "list.select">
+		<input type="text" class="form-control" ng-model="list.name" ng-keypress="confirm(list)">
+	</form>
    </div>
    <div class="panel-body">
    <div class="simpleDemo">
@@ -172,7 +181,8 @@ body {
    </div>
    <div>
    <button class="btn btn-success" ng-click="newgroup()">New Groups</button>
-   <span class="btn btn-primary" ng-click="gostepthree()">Next Step</span>
+   <span class="btn btn-primary" ng-click="gofinal()">Next Step</span>
+   <span class="btn btn-warning" ng-click="back()">Back</span>
    <span class ="btn btn-danger" dnd-list="[]">Transh <i class="fa fa-trash" aria-hidden="true"></i></span>
 	
 	   </div>

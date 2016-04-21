@@ -15,7 +15,7 @@
     .card{
       width: 40%;
       margin-left: 30%;
-      margin-top:10%;
+      margin-top:20px;
       height:auto;
       padding: 20px;
       background-color:#818181;
@@ -35,18 +35,26 @@
       .header{
         font-size:3rem;
       }
-    </style>
+      .titl{
+        text-align: center;
+        color:white;
+      
+    }
+    .titl h1{
+      font-family: 'RobotoDraft', 'Roboto', sans-serif;
+      font-weight: 300;
+          }
+   </style>
     </head>
     <body>
+    <div class = "titl"><h1>Add Your Bulletpoints</h1></div>
        <div class="card">
-          <p class="header">{{projectname}}<p>
+          <p class="header">{{mainIdea}}<p>
               <div class="card-block">
-          <div class="input-group">
-           <input type="text" class="form-control" placeholder="Add your Bulletpoints" ng-model="bullet">
-             <span class="input-group-btn">
-              <button class="btn btn-primary" type="button" ng-click="add()">Add!</button>
-             </span>
-            </div>
+          <form class="form-group">
+           <input type="text" class="form-control" placeholder="Add your Bulletpoints" ng-model="bullet" ng-keypress =" add();">
+            
+            </form>
             <ul class="list-group">
               <li class="list-group-item" ng-repeat = "b in bulletpoints">{{b}}<span class="cha" ng-click="delete(b)"><i class="fa fa-times"></i></span></li>
          </ul>         

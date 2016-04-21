@@ -98,8 +98,32 @@ var myapp=angular.module('app', [require("angular-ui-router"),"dndLists"])
 			controller:"stepthreeCtrl"
 		}
 	)
+   .state(
+    'finalview',
+   {
+	 url:"/finalview",
+	 templateUrl:"templates/finalView.html",
+	 controller:"finalViewCtrl"
+	
+   })
+   .state(
+	 'viewproject',
+	{
+		url:"/viewproject",
+		templateUrl:"templates/viewproject.html",
+		controller:"viewprojectCtrl"
+	}
+	.state(
+		'four',
+		{
+			url:"/four",
+			templateUrl:"templates/four.html",
+			controller:"fourCtrl"
+		}
+	)
+	)
 });
-myapp.factory('User',function($http,$state,Respon){
+myapp.factory('User',function($http,$state,Respon,Project){
 	
 	return {
 		Login:function(name,pass)
@@ -118,6 +142,8 @@ myapp.factory('User',function($http,$state,Respon){
 					Respon.email = Respon.data["email"];
 					Respon.success = "yes";
 					Respon.password =pass;
+					Project.username = Respon.username;
+					
 					$state.go("userProfile");
 				}
 		       else{ alert(response.data["success"]);
@@ -146,6 +172,20 @@ myapp.factory('User',function($http,$state,Respon){
 			}, function error(response){
 				alert("Connection Fail")
 			});
+		},
+	   Sub:function(d)
+		{
+			
+		  	return $http({
+			        method:'POST',
+			        url: 'http://affiniti.us/final',
+			        data:d,
+			        headers:{'Content-Type':'application/json'}
+					}).then(function success(response){
+						 
+					},function error(response){
+						alert("somthingwrong");
+					});
 		}
 		};
 	
@@ -161,8 +201,12 @@ myapp.factory('User',function($http,$state,Respon){
 })
 .factory('Project',function(){
 	return{
+	username:"",
 	projectname:"",
-	ideas:[]
+	mainIdea:"",
+	ideas:[],
+	group:[],
+	groups:[]
 	};
 })
 .controller('AppCtrl',function($scope,$state){
@@ -222,6 +266,7 @@ myapp.factory('User',function($http,$state,Respon){
 				if(response.data["success"]=="yes")
 				{
 				   Respon.username = $scope.changedname;
+				   Project.username = Respon.username;
 				   $scope.name = Respon.username;
 				}
 				else{
@@ -282,17 +327,19 @@ myapp.factory('User',function($http,$state,Respon){
 		$scope.gostepone = function()
 		{
 			Project.projectname = $scope.projectname;
+			Project.mainIdea = $scope.mainIdea;
 						$state.go("stepone");
 		}
 	})
 	
 	
 	.controller('steponeCtrl',function($state,$scope,Project){
-		$scope.projectname = Project.projectname;
+		$scope.mainIdea = Project.mainIdea;
 		$scope.bulletpoints = [];
 		$scope.bullet="";
 		$scope.add= function()
 		{
+			if(event.keyCode==13){
 			
 			if ($scope.bulletpoints.indexOf($scope.bullet)<0 && $scope.bullet!="")
 			{
@@ -301,6 +348,7 @@ myapp.factory('User',function($http,$state,Respon){
 			}
 			else {
 		     $scope.bullet="";
+			}
 			}
 			
 		}
@@ -320,10 +368,10 @@ myapp.factory('User',function($http,$state,Respon){
 			selected: null,
 			lists:[]
 		};
-
+        $scope.ideas = Project.ideas.concat();
 		// Generate initial model
-		$scope.models.lists.push({"name":"Original","l":Project.ideas,"select":false});
-
+		$scope.models.lists.push({"name":"Original","l":$scope.ideas,"select":false});
+        //alert(Project.ideas);
 		// Model to JSON for demo purpose
 		$scope.$watch('models', function(model) {
 			$scope.modelAsJson = angular.toJson(model, true);
@@ -338,13 +386,24 @@ myapp.factory('User',function($http,$state,Respon){
 		}
 		$scope.confirm=function(list)
 		{
-			list["select"]=false;
+			if(event.keyCode==13)
+			{
+			 list["select"]=false;
+			}
 			
 		}	
 		$scope.gostepthree=function()
 		{
-			Project.ideas = $scope.models.lists;
+			Project.group = $scope.models.lists;
 			$state.go("stepthree");
+		}
+		$scope.delete=function(list)
+		{
+			$scope.models.lists.splice($scope.models.lists.indexOf(list),1);
+		}
+		$scope.back=function()
+		{
+			window.history.back();
 		}
 	})
 	.controller('stepthreeCtrl',function($state,$scope,Project)
@@ -353,9 +412,9 @@ myapp.factory('User',function($http,$state,Respon){
 			selected: null,
 			lists:[]
 		};
-
+        $scope.group = Project.group.concat();
 		// Generate initial model
-		$scope.models.lists.push({"name":"Your Groups","l":Project.ideas,"select":false});
+		$scope.models.lists.push({"name":"Your Groups","l":$scope.group,"select":false});
 
 		// Model to JSON for demo purpose
 		$scope.$watch('models', function(model) {
@@ -371,14 +430,44 @@ myapp.factory('User',function($http,$state,Respon){
 		}
 		$scope.confirm=function(list)
 		{
-			list["select"]=false;
+			if(event.keyCode==13)
+			{
+			 list["select"]=false;
+			}
 			
 		}	
-		$scope.gostepthree=function()
+		$scope.gofinal=function()
 		{
-			Project.ideas = $scope.models.lists;
-			$state.go("stepthree");
+			Project.groups = $scope.models.lists;
+			$state.go("finalview");
 		}
+		$scope.delete=function(list)
+		{
+			$scope.models.lists.splice($scope.models.lists.indexOf(list),1);
+		}
+		$scope.back=function()
+		{
+			window.history.back();
+		}		
+	})
+	.controller('finalViewCtrl',function($state,$scope,Project,User){
+		$scope.groups = Project.groups;
+		$scope.projectname=Project.projectname;
+		$scope.mainIdea = Project.mainIdea;
+		$scope.back=function()
+		{
+			window.history.back();
+		}
+		$scope.sumb=function()
+		{  
+	
+			
+			User.Sub(JSON.stringify(Project));
+		}
+			})
+	.controller('fourCtrl',function($state,$scope,Project,User){
+		
+		
 	});
 	
 	
