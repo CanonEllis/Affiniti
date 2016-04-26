@@ -509,7 +509,7 @@ myapp.factory('User',function($http,$state,Respon,Project){
 			})
 	.controller('fourCtrl',function($state,$scope,Project,User){
 		$scope.mainIdea =Project.mainIdea;
-		$scope.timeout = false;
+		/*$scope.timeout = false;
 		var total =180000;
 		var s,m,c;
 		function count()
@@ -529,14 +529,14 @@ myapp.factory('User',function($http,$state,Respon,Project){
 			total = total -1000;
 		  if($scope.timeout == false) c=setTimeout(count, 1000);
 		}
-		count();
+		count();*/
 		$scope.gostepone=function()
 		{
 			Project.four[0] = $scope.idea1;
 			Project.four[1] = $scope.idea2;
 			Project.four[2] = $scope.idea3;
 			Project.four[3] = $scope.idea4;
-			$scope.timeout = true;
+			//$scope.timeout = true;
 			$state.go("stepone");
 		}
 	});
