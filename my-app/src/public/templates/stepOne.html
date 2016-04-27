@@ -166,7 +166,9 @@
     </div>
 
     <div class = "module form-module">
-    <div class="form">
+     <div class="alert alert-info" ng-show ="!timeout" role="alert" id ="remain"></div>
+    <div class="alert alert-danger" ng-show ="timeout" role="alert">Oh no! Hurry up!</div>
+        <div class="form">
       <h2>{{mainIdea}}</h2>
           <form>
            <input type="text" class="form-control" placeholder="Add your Bulletpoints" ng-model="bullet" ng-keypress =" add();">

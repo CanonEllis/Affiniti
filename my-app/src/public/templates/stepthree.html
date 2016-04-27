@@ -101,6 +101,37 @@ body {
    box-sizing: border-box;
    transition: height 1s;
   }
+.tan
+{
+	width:40%;
+	margin:5%;
+	display:inline-block;
+}
+.trash
+{
+	border-radius: 10px;
+	width: 45%;
+	margin-left:2.5%;
+	height:auto;
+	display:inline-block;
+	background-color: #FF6666;
+	text-align: center;
+	padding:15px;
+}
+.new
+{
+	width: 45%;
+	margin-left:2.5%;
+	 background-color: #66cc00;
+	padding:15px;
+	height:auto;
+	text-align: center;
+	display:inline-block;
+}
+.btns
+{
+	text-align: right;
+}
 .btn
 {
 	margin:auto;
@@ -181,14 +212,10 @@ body {
    </div>
    </div>
    </div>
-  <div>
-
+<div class = "tan"> <div class="trash" dnd-list="[]"> <i class="fa fa-trash fa-3x" aria-hidden="true"></i></div> <div class="new" ng-click="newgroup()"><i class="fa fa-plus fa-fw fa-3x" aria-hidden="true"></i></div></div>
+   <div class= btns>
    <span class="btn btn-warning" ng-click="back()">Back<i class="fa fa-angle-double-left fa-fw" aria-hidden="true"></i></span>
    <span class="btn btn-primary" ng-click="gofinal()">Next Step<i class="fa fa-angle-double-right fa-fw" aria-hidden="true"></i></span>
-   
-   <button class="btn btn-success" ng-click="newgroup()">New Group<i class="fa fa-plus fa-fw" aria-hidden="true"></i></button>
-   <span class ="btn btn-danger" dnd-list="[]">Trash <i class="fa fa-trash" aria-hidden="true"></i></span>
-    
        </div>
 </div>
 

@@ -373,12 +373,37 @@ myapp.factory('User',function($http,$state,Respon,Project){
 		$scope.mainIdea = Project.mainIdea;
 		$scope.bulletpoints = [];
 		$scope.bullet="";
-		$scope.add= function()
+		$scope.timeout = false;
+		var total =10000;
+		var s,m,c;
+		function count()
+		{  			
+			m = parseInt(total/60000);
+			s = total%60000;
+			s = s/1000;
+			if(s<10){s= "0"+s;}
+		   if($scope.timeout==false) document.getElementById("remain").innerHTML="Your Time Remaining: "+m+":"+s;
+			if(m<=0&&s<=0)
+			{
+				$scope.timeout=true;
+				clearTimeout(c)
+				$scope.$apply();	
+				
+			}
+			total = total -1000;
+		  if($scope.timeout == false) c=setTimeout(count, 1000);
+		}
+		count();
+	   $scope.add= function()
 		{
 			if(event.keyCode==13){
 			
 			if ($scope.bulletpoints.indexOf($scope.bullet)<0 && $scope.bullet!="")
 			{
+				total=10000;
+				$scope.timeout=false;
+				clearTimeout(c);
+				count();
 				$scope.bulletpoints.push($scope.bullet);
 				$scope.bullet = "";
 			}
@@ -395,6 +420,8 @@ myapp.factory('User',function($http,$state,Respon,Project){
 		
 		$scope.gosteptwo=function()
 		{
+			$scope.timeout=true;
+			clearTimeout(c);
 			Project.ideas =$scope.bulletpoints;
 			$state.go("steptwo");
 		}
