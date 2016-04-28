@@ -144,6 +144,7 @@ myapp.factory('IMG',function($http,$state,Respon,Project)
 					if(response.data["success"]==="yes")
 					{
 					   Respon.img = response.data["profpic"];
+					   alert(Respon.img.length);
 					}
 					else{alert("hmmm")}
 				},function error(response){
@@ -316,9 +317,11 @@ myapp.factory('User',function($http,$state,Respon,Project,IMG){
 		$scope.name = Respon.username;
 		$scope.email = Respon.email;
 		$scope.img = Respon.img;
+	
 		$scope.changeimage = function()
 		{
 			IMG.UpImg($scope.name, $scope.myimg);
+			alert($scope.myimg.base64.length);
 		    $scope.img = $scope.myimg.base64;
 			
 		}

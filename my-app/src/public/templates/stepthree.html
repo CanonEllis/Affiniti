@@ -104,7 +104,6 @@ body {
 .center {
 	margin: auto;
 	width: 60%;
-	padding: 20px;
 	background: #ECF0F1;
 		
 }
@@ -146,6 +145,18 @@ body {
 .btns
 {
 	text-align: right;
+	padding:10px;
+	margin:5px;
+	border-top:#999999 solid 1px;
+	background-color: #ECF0F1;
+}
+.new:hover
+{
+	background-color:#3DC02F;
+}
+.trash:hover
+{
+	background-color: #E8423D;
 }
 .btn
 {
@@ -206,11 +217,14 @@ body {
     width: 400px;
     min-height: 200px;
     padding: 10px;
+    padding-left: 20px;
+    padding-right:20px;
     position:relative;
-    background: #ecf0f1;
+    background: #f5f5dc;
     border-top: 1px solid white;
     border-right: 1px solid #ccc;
     -webkit-box-shadow: -1px 2px 2px rgba(0, 0, 0, 0.2);
+ 
     
 }
 
@@ -255,6 +269,7 @@ body {
     text-decoration: underline;
     color: black;
 }
+
 </style>
 
 </head>
@@ -298,7 +313,7 @@ body {
    </div>
    </div>
 <div class = "tan"> <div class="trash" dnd-list="[]"> <i class="fa fa-trash fa-3x" aria-hidden="true"></i></div> <div class="new" ng-click="newgroup()"><i class="fa fa-plus fa-fw fa-3x" aria-hidden="true"></i></div></div>
-   <div class= btns>
+   <div class= "btns panel-footer">
    <span class="btn btn-warning" ng-click="back()">Back<i class="fa fa-angle-double-left fa-fw" aria-hidden="true"></i></span>
    <span class="btn btn-primary" ng-click="gofinal()">Next Step<i class="fa fa-angle-double-right fa-fw" aria-hidden="true"></i></span>
        </div>
