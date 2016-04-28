@@ -321,7 +321,6 @@ myapp.factory('User',function($http,$state,Respon,Project,IMG){
 		$scope.changeimage = function()
 		{
 			IMG.UpImg($scope.name, $scope.myimg);
-			alert($scope.myimg.base64.length);
 		    $scope.img = $scope.myimg.base64;
 			
 		}
