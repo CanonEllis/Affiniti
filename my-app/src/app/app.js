@@ -144,7 +144,7 @@ myapp.factory('IMG',function($http,$state,Respon,Project)
 					if(response.data["success"]==="yes")
 					{
 					   Respon.img = response.data["profpic"];
-					   alert(Respon.img.length);
+					 
 					}
 					else{alert("hmmm")}
 				},function error(response){
