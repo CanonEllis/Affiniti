@@ -323,8 +323,8 @@
 				</div>
 				<!-- END SIDEBAR USER TITLE -->
 				<!-- SIDEBAR BUTTONS -->
-        <a class="thumbnail" >
-          <img src="img/annymous.jpg" alt="User" style="width:200px;height:200px;">
+        <a class="thumbnail"  data-toggle="modal" data-target="#imageModal">
+          <img data-ng-src="data:image/JPEG;base64,{{img}}" alt="User" style="width:200px;height:200px;">
              </a>
 				<!-- END SIDEBAR BUTTONS -->
 				<!-- SIDEBAR MENU -->
@@ -431,14 +431,12 @@
 			<div class="modal-body">
 			 <div class="form-group">
       <label for="exampleInputFile">File input</label>
-      <!--input type="file" id="InputFile" ng-model="myimg" accept=".png,.jpg,.JPEG"-->
-          <input type='file' accept='image/*' onchange='openFile(event)'><br>
-          <img id='output'>
+      <input type="file" id="InputFile" ng-model="myimg" accept=".png,.jpg,.JPEG" base-sixty-four-input>
       <p class="help-block">Choose one pictrue</p>
       </div>			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary" data-dismiss="modal" >Save changes</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal"  ng-click="changeimage()">Save changes</button>
 			</div>
 		</div>
 	</div>

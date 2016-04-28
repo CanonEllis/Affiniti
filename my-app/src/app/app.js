@@ -1,4 +1,11 @@
 import angular from 'angular';
+/*! angular-base64-upload - v0.1.19
+* https://github.com/adonespitogo/angular-base64-upload
+* Copyright (c) Adones Pitogo <pitogo.adones@gmail.com> [March 13, 2016]
+* Licensed MIT */
+
+!function(a,b){"use strict";a._arrayBufferToBase64=function(b){for(var c="",d=new Uint8Array(b),e=d.byteLength,f=0;e>f;f++)c+=String.fromCharCode(d[f]);return a.btoa(c)};var c=a.angular.module("naif.base64",[]);c.directive("baseSixtyFourInput",["$window","$q",function(a,b){for(var c={onChange:"&",onAfterValidate:"&",parser:"&"},d=["onabort","onerror","onloadstart","onloadend","onprogress","onload"],e=d.length-1;e>=0;e--){var f=d[e];c[f]="&"}return{restrict:"A",require:"ngModel",scope:c,link:function(c,e,f,g){function h(){for(var c=t.length-1;c>=0;c--){var d=new a.FileReader,e=t[c],f={},g=[];f.filetype=e.type,f.filename=e.name,f.filesize=e.size,t[c].deferredObj=b.defer(),g.push(t[c].deferredObj.promise),b.all(g).then(n),k(d,e,f),d.readAsArrayBuffer(e)}}function i(a){f.onChange&&c.onChange()(a,t)}function j(a){if(f.onAfterValidate){for(var d=[],e=t.length-1;e>=0;e--)d.push(t[e].deferredObj.promise);b.all(d).then(function(){c.onAfterValidate()(a,u,t)})}}function k(a,b,e){for(var g=d.length-1;g>=0;g--){var h=d[g];f[h]&&"onload"!==h&&l(h,c[h],a,b,e)}a.onload=m(a,b,e)}function l(a,b,c,d,e){c[a]=function(a){b()(a,c,d,t,u,e)}}function m(d,e,g){return function(h){var i,j=h.target.result;g.base64=a._arrayBufferToBase64(j),i=f.parser?b.when(c.parser()(e,g)):b.when(g),i.then(function(a){u.push(a),e.deferredObj.resolve()}),f.onload&&c.onload()(h,d,e,t,u,g)}}function n(){var a=f.multiple?u:u[0];g.$setViewValue(a),q(a),r(a),o(a),p(a),s(a)}function o(a){if(f.maxnum&&f.multiple&&a){var b=a.length<=parseInt(f.maxnum);g.$setValidity("maxnum",b)}return a}function p(a){if(f.minnum&&f.multiple&&a){var b=a.length>=parseInt(f.minnum);g.$setValidity("minnum",b)}return a}function q(a){var b=!0;if(f.maxsize&&a){var c=1e3*parseFloat(f.maxsize);if(f.multiple)for(var d=0;d<a.length;d++){var e=a[d];if(e.filesize>c){b=!1;break}}else b=a.filesize<=c;g.$setValidity("maxsize",b)}return a}function r(a){var b=!0,c=1e3*parseFloat(f.minsize);if(f.minsize&&a){if(f.multiple)for(var d=0;d<a.length;d++){var e=a[d];if(e.filesize<c){b=!1;break}}else b=a.filesize>=c;g.$setValidity("minsize",b)}return a}function s(a){var b,c,d,e=!0;if(f.accept&&(c=f.accept.trim().replace(/[,\s]+/gi,"|").replace(/\./g,"\\.").replace(/\/\*/g,"/.*"),b=new RegExp(c)),f.accept&&a){if(f.multiple)for(var h=0;h<a.length;h++){var i=a[h];if(d="."+i.filename.split(".").pop(),e=b.test(i.filetype)||b.test(d),!e)break}else d="."+a.filename.split(".").pop(),e=b.test(a.filetype)||b.test(d);g.$setValidity("accept",e)}return a}if(g){var t=[],u=[];e.on("change",function(a){a.target.files.length&&(u=[],u=angular.copy(u),t=a.target.files,h(),i(a),j(a))}),g.$isEmpty=function(a){return!a||(angular.isArray(a)?0===a.length:!a.base64)},c._clearInput=function(){e[0].value=""},c.$watch(function(){return g.$viewValue},function(a,b){g.$isEmpty(b)||g.$isEmpty(a)&&c._clearInput()})}}}}])}(window);
+//# sourceMappingURL=angular-base64-upload.min.js.map
 /**
  * angular-drag-and-drop-lists v1.4.0
  *
@@ -35,9 +42,8 @@ var n,t=e.dataTransfer.getData("Text")||e.dataTransfer.getData("text/plain")
 try{n=JSON.parse(t)}catch(d){return s()}var i=l()
 return o.dndDrop&&(n=u(o.dndDrop,e,i,n),!n)?s():(n!==!0&&a.$apply(function(){a.$eval(o.dndList).splice(i,0,n)}),u(o.dndInserted,e,i,n),"none"===e.dataTransfer.dropEffect?"copy"===e.dataTransfer.effectAllowed||"move"===e.dataTransfer.effectAllowed?r.dropEffect=e.dataTransfer.effectAllowed:r.dropEffect=e.ctrlKey?"copy":"move":r.dropEffect=e.dataTransfer.dropEffect,s(),e.stopPropagation(),!1)}),d.on("dragleave",function(e){e=e.originalEvent||e,d.removeClass("dndDragover"),n(function(){d.hasClass("dndDragover")||p.remove()},100)})}}]).directive("dndNodrag",function(){return function(e,n,r){n.attr("draggable","true"),n.on("dragstart",function(e){e=e.originalEvent||e,e._dndHandle||(e.dataTransfer.types&&e.dataTransfer.types.length||e.preventDefault(),e.stopPropagation())}),n.on("dragend",function(e){e=e.originalEvent||e,e._dndHandle||e.stopPropagation()})}}).directive("dndHandle",function(){return function(e,n,r){n.attr("draggable","true"),n.on("dragstart dragend",function(e){e=e.originalEvent||e,e._dndHandle=!0})}}).factory("dndDragTypeWorkaround",function(){return{}}).factory("dndDropEffectWorkaround",function(){return{}});
 
-var myapp=angular.module('app', [require("angular-ui-router"),"dndLists"])
+var myapp=angular.module('app', [require("angular-ui-router"),"dndLists",'naif.base64'])
 .config(function($stateProvider, $urlRouterProvider)
-
 {
 	$urlRouterProvider.otherwise("/login");
 	$stateProvider
@@ -123,7 +129,42 @@ var myapp=angular.module('app', [require("angular-ui-router"),"dndLists"])
 	)
 	
 });
-myapp.factory('User',function($http,$state,Respon,Project){
+myapp.factory('IMG',function($http,$state,Respon,Project)
+{
+	return {
+		GetImg:function(username)
+			{
+				return $http({
+					method: "POST",
+					url:'http://affiniti.us/profpic',
+					data: $.param({'username':username}),
+					headers:{'Content-Type':'application/x-www-form-urlencoded'}
+				}).then(function success(response){
+				    
+					if(response.data["success"]==="yes")
+					{
+					   Respon.img = response.data["profpic"];
+					}
+					else{alert("hmmm")}
+				},function error(response){
+					alert("failed");});
+			},
+		UpImg:function(username,img)
+			{
+				return $http({
+					method:"PUT",
+					url:'http://affiniti.us/profpic',
+					data: $.param({'username':username,'profpic':img.base64}),
+					headers:{'Content-Type':'application/x-www-form-urlencoded'}
+				}).then(function success(response){
+					
+				},function error(response){
+					alert("failed");
+					});
+			}
+	};
+});
+myapp.factory('User',function($http,$state,Respon,Project,IMG){
 	
 	return {
 		Login:function(name,pass)
@@ -146,9 +187,11 @@ myapp.factory('User',function($http,$state,Respon,Project){
 					Respon.success = "yes";
 					Respon.password =pass;
 					Project.username = Respon.username;
+					
 					if(Respon.success=="yes")
 					{
-						$state.go("userProfile");
+					      IMG.GetImg(Respon.username).then(function s(){$state.go("userProfile");});
+						
 					}
 					
 				}
@@ -207,8 +250,7 @@ myapp.factory('User',function($http,$state,Respon,Project){
 				}
 			},function error(response){});
 		}
-		};
-	
+	};	
 })
 .factory('Respon',function(){
 	return {
@@ -216,7 +258,9 @@ myapp.factory('User',function($http,$state,Respon,Project){
 		username:"",
 		password:"",
 		email:"",
-		success:"no"
+		success:"no",
+		myimg:"",
+		img:""
 	
 	 };
 })
@@ -264,13 +308,21 @@ myapp.factory('User',function($http,$state,Respon,Project){
 		User.SignUp($scope.firstname,$scope.lastname,$scope.username,$scope.password,$scope.email);
 	}
 })
-	.controller('userCtrl',function($state,$scope,$http,User,Respon,Project){
+.controller('userCtrl',function($state,$scope,$http,User,Respon,Project,IMG){
 		
-	
+	   
 		if(Respon.success!="yes") $state.go("login");
         $scope.projects = Respon.data;
 		$scope.name = Respon.username;
 		$scope.email = Respon.email;
+		$scope.img = Respon.img;
+		$scope.changeimage = function()
+		{
+			IMG.UpImg($scope.name, $scope.myimg);
+		    $scope.img = $scope.myimg.base64;
+			
+		}
+			
 		$scope.delete=function(project)
 		{
 			User.Delete(project.username,project.projectname);
@@ -291,27 +343,7 @@ myapp.factory('User',function($http,$state,Respon,Project){
 		{
 			$state.go("newproject");
 		}
-		$scope.changeusername=function()
-		{
-			$http({
-				method:'POST',
-				url: 'http://affiniti.us/profile',
-				data: $.param({'newusername':$scope.changedname,'oldusername':$scope.name}),
-				headers:{'Content-Type':'application/x-www-form-urlencoded'}
-			}).then(function success(response){
-				if(response.data["success"]=="yes")
-				{
-				   Respon.username = $scope.changedname;
-				   Project.username = Respon.username;
-				   $scope.name = Respon.username;
-				}
-				else{
-					alert("somethingwrong");
-				}
-			}, function error(response){
-				alert("Connection Fail")
-			});
-		}
+
 		$scope.changepass=function()
 		{
 			$http({
