@@ -192,6 +192,69 @@ body {
   font-size: 20px;
   color: #ECF0F1;
 }
+
+/*tutorial box*/
+.box11 body {
+    font-size: 11px;
+    font-family: 'RobotoDraft', 'Roboto', sans-serif;
+    color: black ;
+    text-align: center; 
+}
+
+.box11{
+    margin: 40px auto;
+    width: 400px;
+    min-height: 200px;
+    padding: 10px;
+    position:relative;
+    background: #ecf0f1;
+    border-top: 1px solid white;
+    border-right: 1px solid #ccc;
+    -webkit-box-shadow: -1px 2px 2px rgba(0, 0, 0, 0.2);
+    
+}
+
+
+
+.box11_ribbon{
+    position:absolute;
+    top:-25px; left: 30%;
+    width: 130px;
+    height: 40px;
+    background: -webkit-gradient(linear, 555% 20%, 0% 92%, from(rgba(0, 0, 0, 0.1)), to(rgba(0, 0, 0, 0.0)), color-stop(.1,rgba(0, 0, 0, 0.2)));
+    border-left: 1px dashed rgba(0, 0, 0, 0.1);
+    border-right: 1px dashed rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.2);
+}
+
+.box11 img {
+    width: 100%;
+    margin-top: 15px;
+}
+
+.box11 p{ 
+    margin-top: 25px;
+    text-align: justify;
+    color: black;
+}
+
+.box11 h1{
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px; 
+    text-align: center;
+    color: black;
+}
+
+.box11 a{
+    text-decoration: none;
+    color: black;
+}
+
+.box11 a:hover{
+    text-decoration: underline;
+    color: black;
+}
 </style>
 
 </head>
@@ -240,7 +303,15 @@ body {
    <span class="btn btn-primary" ng-click="gofinal()">Next Step<i class="fa fa-angle-double-right fa-fw" aria-hidden="true"></i></span>
        </div>
 </div>
-
+<div class="box11 tutbody" style="background-color = #ecf0f1">
+       <h1>Step Five</h1>   
+        <p>
+         At this point you should have a bunch of different groups. If you look over your groups you may even, see that a few of them share similarities to each other. In this part of the process you can group groups into a large group which allows you to have a more defined structure. For example, the man idea Education may have 3 main groups Teaching Assistants, Students, and Professors and inside each of those groups are smaller groups that contain bite sized notes.
+       </p>
+    
+       <br />
+       <div class="box11_ribbon"></div>                
+</div>
 
 </body>
 </html>
