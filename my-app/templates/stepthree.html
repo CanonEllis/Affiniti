@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900|RobotoDraft:400,100,300,500,700,900'>
+
+
+<style>
+* {
+  border-radius: 0 !important;
+}
+body {
+	background-color: #2C3E50;
+}
+/**
+ * For the correct positioning of the placeholder element, the dnd-list and
+ * it's children must have position: relative
+ */
+.simpleDemo ul[dnd-list],
+.simpleDemo ul[dnd-list] > li {
+	position: relative;
+}
+
+/**
+ * The dnd-list should always have a min-height,
+ * otherwise you can't drop to it once it's empty
+ */
+.simpleDemo ul[dnd-list] {
+	min-height: 42px;
+	padding-left: 0px;
+}
+
+/**
+ * The dndDraggingSource class will be applied to
+ * the source element of a drag operation. It makes
+ * sense to hide it to give the user the feeling
+ * that he's actually moving it.
+ */
+.simpleDemo ul[dnd-list] .dndDraggingSource {
+	display: none;
+}
+
+/**
+ * An element with .dndPlaceholder class will be
+ * added to the dnd-list while the user is dragging
+ * over it.
+ */
+.simpleDemo ul[dnd-list] .dndPlaceholder {
+	display: block;
+	background-color: #CDD0D1; /* shadow behind */
+	min-height: 42px;
+}
+
+/**
+ * The dnd-lists's child elements currently MUST have
+ * position: relative. Otherwise we can not determine
+ * whether the mouse pointer is in the upper or lower
+ * half of the element we are dragging over. In other
+ * browsers we can use event.offsetY for this.
+ */
+.simpleDemo ul[dnd-list] li {
+	background-color: #ECF0F1;
+	border: 1px solid #ddd;
+	border-top-right-radius: 4px;
+	border-top-left-radius: 4px;
+	display: block;
+	padding: 10px 15px;
+	margin-bottom: -1px;
+}
+
+/**
+ * Show selected elements in green
+ */
+.simpleDemo ul[dnd-list] li.selected {
+	background-color: #dff0d8;
+	color: #3c763d;
+}
+.simpleDemo
+{
+	width:100%;
+	display: inline-block;
+	height:auto;
+	text-align: center;
+	font-family: 'RobotoDraft', 'Roboto', sans-serif;
+	font-size: 10px;
+}
+
+.center {
+	margin: auto;
+	width: 60%;
+	padding: 20px;
+	background: #ECF0F1;
+		
+}
+.panel
+{   
+   width:40%;
+   margin:5%;
+   display: inline-block;
+   box-sizing: border-box;
+   transition: height 1s;
+  }
+.tan
+{
+	width:40%;
+	margin:5%;
+	display:inline-block;
+}
+.trash
+{
+	border-radius: 10px;
+	width: 45%;
+	margin-left:2.5%;
+	height:auto;
+	display:inline-block;
+	background-color: #FF6666;
+	text-align: center;
+	padding:15px;
+}
+.new
+{
+	width: 45%;
+	margin-left:2.5%;
+	 background-color: #66cc00;
+	padding:15px;
+	height:auto;
+	text-align: center;
+	display:inline-block;
+}
+.btns
+{
+	text-align: right;
+}
+.btn
+{
+	margin:auto;
+	margin-left:5%;
+}
+.mygroup
+{
+	
+}
+.list-group
+{  
+	max-height:0;
+    overflow: hidden;
+    transition:max-height 1s;
+	width:auto;
+	border:10px;
+	
+	}
+.mygroup:hover .mygroupul{
+	max-height:999px;
+	transition: max-height 1s;
+}
+.cool
+{
+	background-color:black;
+}
+.cha{
+	float:right;
+}
+.titl{
+	text-align: center;
+	color:white;
+
+	}
+	.titl h1{
+		font-family: 'RobotoDraft', 'Roboto', sans-serif;
+		font-weight: 300;
+		    }
+
+		    .panel-default > .panel-heading {
+  background-color: #2980B9;
+  font-family: 'RobotoDraft', 'Roboto', sans-serif;
+  font-size: 20px;
+  color: #ECF0F1;
+}
+</style>
+
+</head>
+<body>
+<!-- The dnd-list directive allows to drop elements into it.
+	 The dropped data will be added to the referenced list -->
+<div class="titl"><h1>Grouping Your Groups</h1></div>
+<div class="center">
+ <div class="panel panel-default"  ng-repeat="list in models.lists | filter:NewGroup track by $index">
+   <div class="panel-heading" > <p ng-show="!list.select" ng-click="changegroupname(list)">{{list.name}}<span class="cha" ng-click="delete(list)"><i class="fa fa-times"></i></p>
+	<form  ng-show= "list.select">
+		<input type="text" class="form-control" ng-model="list.name" ng-keypress="confirm(list)">
+	</form>
+   </div>
+   <div class="panel-body">
+   <div class="simpleDemo">
+	 <ul dnd-list="list.l">
+	<li 
+		ng-repeat="item in list.l | filter:NewGroup track by $index"
+		dnd-draggable="item"
+		dnd-moved="list.l.splice($index, 1)"
+		dnd-effect-allowed="move"
+		dnd-selected="models.selected = item"
+		ng-class="{'selected': models.selected === item}"
+		>
+		
+		<div class="mygroup ">
+			<h4>
+				{{item.name}}
+			</h4>
+			<div>
+			 <ul  class="mygroupul list-group">
+				<li class="list-group-item" ng-repeat="elem in item.l" >{{elem}}</li>
+			</ul>
+			</div>
+		</div>
+		
+		
+	</li>
+   </div>
+   </div>
+   </div>
+<div class = "tan"> <div class="trash" dnd-list="[]"> <i class="fa fa-trash fa-3x" aria-hidden="true"></i></div> <div class="new" ng-click="newgroup()"><i class="fa fa-plus fa-fw fa-3x" aria-hidden="true"></i></div></div>
+   <div class= btns>
+   <span class="btn btn-warning" ng-click="back()">Back<i class="fa fa-angle-double-left fa-fw" aria-hidden="true"></i></span>
+   <span class="btn btn-primary" ng-click="gofinal()">Next Step<i class="fa fa-angle-double-right fa-fw" aria-hidden="true"></i></span>
+       </div>
+</div>
+
+
+</body>
+</html>
