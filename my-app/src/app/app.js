@@ -191,7 +191,7 @@ myapp.factory('User',function($http,$state,Respon,Project,IMG){
 					
 					if(Respon.success=="yes")
 					{
-					      IMG.GetImg(Respon.username).then(function s(){$state.go("userProfile");});
+					      IMG.GetImg(Respon.username).then(function s(){$state.go("userProfile");},function s(){$state.go("userProfile");});
 						
 					}
 					
